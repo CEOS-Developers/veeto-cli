@@ -10,7 +10,7 @@ const InRoomFooterWrapper = styled.div`
     align-items:center;
 
     width:100%;
-    height:4rem;
+    height:fit-content;
     overflow:auto;
 `
 

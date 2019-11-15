@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import Link from 'next/link'
 
 import PageHeader from '../components/organisms/PageHeader'
-import MainExplanation from '../components/organisms/MainExplanation'
-import LeavesSeparator from '../components/atoms/icons/leavesSeparator'
-import MainChooseMethod from '../components/templates/MainChooseMethod'
+import RoomsChooseDate from '../components/organisms/RoomsChooseDate'
+import RoomListByDate from '../components/organisms/RoomListByDate'
 import MainSchedule from '../components/organisms/MainSchedule'
 import MainFooter from '../components/organisms/MainFooter'
 
@@ -19,7 +18,7 @@ const Wrapper = styled.div`
 `
 
 
-const Home = () => {
+const RoomsByDate = () => {
 
   const [isOpen, setOpen] = useState(false)
   
@@ -35,13 +34,21 @@ const Home = () => {
       </Head>
       <Wrapper>
       <PageHeader></PageHeader>
-      <MainExplanation isOpen={isOpen}/>
-      <LeavesSeparator style={{marginBottom:'2.2rem'}}></LeavesSeparator>
-      <MainChooseMethod></MainChooseMethod>
-      {/* <MainSchedule setOpen={setOpen}/> */}
+      <RepresentativeImg style={{marginTop:"7.6rem"}} src={'/representative.png'}/>
+      <RoomsChooseDate></RoomsChooseDate>
+      <RoomListByDate></RoomListByDate>
       {/* <MainFooter></MainFooter> */}
       </Wrapper>
       </div>); 
 }
 
-export default Home
+const RepresentativeImg = styled.img`
+    width: 93.3%;
+    height: 16.1rem;
+    object-fit: contain;
+    border-radius: 0.9rem;
+    margin-top:3.1rem;
+    margin-bottom:3.1rem;
+`
+
+export default RoomsByDate

@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import Link from 'next/link'
 
 import PageHeader from '../components/organisms/PageHeader'
-import MainExplanation from '../components/organisms/MainExplanation'
-import LeavesSeparator from '../components/atoms/icons/leavesSeparator'
-import MainChooseMethod from '../components/templates/MainChooseMethod'
+import RoomsChooseAct from '../components/organisms/RoomsChooseAct'
 import MainSchedule from '../components/organisms/MainSchedule'
 import MainFooter from '../components/organisms/MainFooter'
 
@@ -19,7 +17,7 @@ const Wrapper = styled.div`
 `
 
 
-const Home = () => {
+const Rooms = () => {
 
   const [isOpen, setOpen] = useState(false)
   
@@ -35,13 +33,21 @@ const Home = () => {
       </Head>
       <Wrapper>
       <PageHeader></PageHeader>
-      <MainExplanation isOpen={isOpen}/>
-      <LeavesSeparator style={{marginBottom:'2.2rem'}}></LeavesSeparator>
-      <MainChooseMethod></MainChooseMethod>
+      <RepresentativeImg src={'/representative.png'}/>
+      <RoomsChooseAct></RoomsChooseAct>
       {/* <MainSchedule setOpen={setOpen}/> */}
       {/* <MainFooter></MainFooter> */}
       </Wrapper>
       </div>); 
 }
 
-export default Home
+const RepresentativeImg = styled.img`
+    width: 93.3%;
+    height: 16.1rem;
+    object-fit: contain;
+    border-radius: 0.9rem;
+    margin-top:3.1rem;
+    margin-bottom:3.1rem;
+`
+
+export default Rooms

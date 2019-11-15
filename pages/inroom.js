@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styled from 'styled-components';
 
 import Text from '../components/atoms/Text';
-import MainHeader from '../components/organisms/MainHeader'
+import PageHeader from '../components/organisms/PageHeader'
 import InRoomInfo from '../components/organisms/InRoomInfo'
 import InRoomParticipants from '../components/organisms/InRoomParticipants'
 import InRoomFooter from '../components/organisms/InRoomFooter'
@@ -16,7 +16,6 @@ const InRoomWrapper = styled.div`
     align-items:center;
 
     width:100%;
-    height:50.75rem;
     overflow:auto;
 `
 
@@ -26,12 +25,13 @@ const InRoom = () => (
       <title>Home</title>
       <link rel='icon' href='/favicon.ico' />
     </Head>
-    <InRoomWrapper>
-    <MainHeader></MainHeader>
+    <PageHeader></PageHeader>
+    {/* <InRoomWrapper>
+    <PageHeader></PageHeader>
     <InRoomInfo></InRoomInfo>
     <InRoomParticipants></InRoomParticipants>
     <InRoomFooter></InRoomFooter>
-    </InRoomWrapper>
+    </InRoomWrapper> */}
     </div>
 )
 

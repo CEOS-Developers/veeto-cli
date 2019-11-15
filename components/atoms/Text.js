@@ -2,8 +2,8 @@ import styled, { css } from 'styled-components';
 
 export default styled.div`
     ${props => css`
-        display:inline-block;
-        width:${props.width}rem;
+        display:${props.display || 'inline-block'};
+        width:${props.width}%;
         height:${props.height}rem;
         font-size:${props.size}rem;
         font-weight:${props.weight};
@@ -13,6 +13,7 @@ export default styled.div`
         line-height:${props.lineheight};
         border-radius:${props.bordr}rem;
         margin-top:${props.mtop}rem;
+        margin-bottom:${props.mbottom}rem;
         padding:${props.padding}rem;
         position:${props.position};
         top:${props.top}rem;
