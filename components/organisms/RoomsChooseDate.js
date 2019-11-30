@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
 import {getDateLines} from '../organisms/MainChooseDate';
+import {getMonth} from '../organisms/MainChooseDate';
 
 const MainExplanation = (props) => {
     return (
@@ -13,9 +14,7 @@ const MainExplanation = (props) => {
                     <span> 선택하기</span>
                 </ServicePhrase2>
                 <hr style={{border:'solid 0.04rem #2e9267', width:'88%', marginTop:'0rem', marginBottom:'1.95rem'}}/>
-                <Month>
-                    11월
-                </Month>
+                {getMonth()}
                 {getDateLines()}
                 <hr style={{border:'solid 0.04rem #2e9267', width:'88%', marginTop:'0rem'}}/>
             </MainChooseActWrapper>

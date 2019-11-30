@@ -38,10 +38,12 @@ const Home = () => {
       <MainExplanation isOpen={isOpen}/>
       <LeavesSeparator style={{marginBottom:'2.2rem'}}></LeavesSeparator>
       <MainChooseMethod></MainChooseMethod>
-      {/* <MainSchedule setOpen={setOpen}/> */}
-      {/* <MainFooter></MainFooter> */}
       </Wrapper>
       </div>); 
+}
+
+Home.getInitialProps = () => {
+  return {};
 }
 
 export default Home

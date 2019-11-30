@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Button } from 'reactstrap';
 import Link from 'next/link'
 import Text from '../atoms/Text';
 
+import TutorialSlider from './Tutorial';
 import Logo from "../atoms/icons/logo";
+import Carousel from 'react-bootstrap/Carousel';
 import { textAlign, display } from '@material-ui/system';
 
 const MainExplanation = (props) => {
     return (
-        <MainExplanationWrapper>
+        <MainExplanationWrapper tutorial={props.tutorial}>
             <ServicePhrase1>
                 신촌에서 인생 친구를 찾다,
             </ServicePhrase1>
@@ -19,7 +22,9 @@ const MainExplanation = (props) => {
             <ServicePhrase3>
                 오직 세 단계로 당신의 인간관계를 비옥하게.
             </ServicePhrase3>
-            <RepresentativeImg src={'/representative.png'}/>
+            {!props.tutorial && (
+                        <RepresentativeImg src={'/representative.png'} style={{marginBottom:'2.9rem'}}/>
+                    )}
 
 
             {/* {!props.isOpen && (
@@ -60,7 +65,7 @@ const MainExplanation = (props) => {
 
   const ServicePhrase1 = styled.div`
     width: fit-content;
-    height: 2.7rem;
+    height: fit-content ;
     font-family: NotoSansCJKkr;
     font-size: 1.8rem;
     font-weight: 500;
@@ -81,7 +86,7 @@ const ServicePhrase2 = styled.div`
 `
 const ServicePhrase3 = styled.div`
     width: fit-content;
-    height: 6.1rem;
+    height: fit-content;
     font-family: NotoSansCJKkr;
     font-size: 1.6rem;
     font-weight: 500;
@@ -109,51 +114,7 @@ const MainExplanationWrapper = styled.div`
     width:100%;
     height:fit-content;
     overflow:auto;
-    margin-top:9.4rem;
-    margin-bottom:2.9rem;
-`
-const LogoWrapper = styled.div`
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-
-    width:fit-content;
-    height:fit-content;
-`
-const selectedActivityWrapper = styled.div`
-    display:flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items:center;
-
-    margin-top:1.125rem;
-    width:58%;
-    height:fit-content;
-    overflow:auto;
-`
-
-const ActivitiesWrapper = styled.div`
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    align-items:center;
-
-    position:relative;
-    left:0.8rem;
-    margin-top:1.125rem;
-    width:58%;
-    height:fit-content;
-    overflow:auto;
-`
-const ActivityWrapper = styled.div`
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    width:fit-content;
-    height:fit-content;
-    overflow:auto;
+    margin-top:${props => props.tutorial ? '5.4rem' : '9.4rem'};
 `
   
 export default MainExplanation

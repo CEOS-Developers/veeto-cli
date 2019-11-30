@@ -1,48 +1,99 @@
 import React, { useState, Component } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link'
-import Bowling from '../../atoms/buttons/icons/bowling';
-import BoardGame from '../../atoms/buttons/icons/boardGame';
-import EscapeRoom from '../../atoms/buttons/icons/escapeRoom';
 
-
-
+import Location from '../../atoms/icons/location'
 
 const SimpleInfo = (props) => {
-    const activity = () =>{
-        if(props.act===1){
-            return(<Bowling style={{marginRight:'1.5rem'}}></Bowling>);
+
+    const icon = () =>{
+        if(props.activity==1){
+            return(<ActivityWrapper>
+            <Bowling src={'/bowling.png'} style={{width:'5.7rem',height:'5.7rem',marginRight:'0rem'}}/>
+            <Label style={{marginRight:'6.4rem'}}>볼링</Label>
+            </ActivityWrapper>);
         }
-        else if(props.act===2){
-            return(<BoardGame style={{marginRight:'1.5rem'}}></BoardGame>);
+        else if(props.activity==2){
+            return(<ActivityWrapper>
+            <BoardGame src={'/boardGame.png'} style={{width:'5.7rem',height:'5.7rem',marginRight:'0.5rem'}}/>
+            <Label style={{marginRight:'3.1rem'}}>보드게임</Label>
+            </ActivityWrapper>);
         }
-        else if(props.act===3){
-            return(<EscapeRoom style={{marginRight:'1.5rem'}}></EscapeRoom>);
+        else if(props.activity==3){
+            return(<ActivityWrapper>
+            <EscapeRoom src={'/escapeRoom.png'} style={{width:'5.7rem',height:'5.7rem',marginRight:'0.9rem'}}/>
+            <Label style={{marginRight:'4.1rem'}}>방탈출</Label>
+            </ActivityWrapper>);
         }
+    }
+
+    if(props.date.toString().length===1){
+        var refinedDate = 0+props.date.toString();
+    }
+    else{
+        var refinedDate = props.date.toString();
     }
 
     return (
                 <SimpleInfoWrapper>
-                    <Line1>
-                        {activity()}
+
+                <Date style={{marginRight:'3.2rem'}}>{props.month}/{refinedDate}</Date>
+                {icon()}
+                <Time>{props.time}</Time>
+                    {/* <Line1>
+                        {icon()}
                         <Time>{props.time}</Time>
-                        <RoomTitle>{props.roomTitle}</RoomTitle>
+                        <RoomTitle>{props.room_name}</RoomTitle>
                     </Line1>
                     <Line2>
                         <BoardGame style={{visibility:'hidden',marginRight:'1.5rem'}}></BoardGame>
                         <Time style={{visibility:'hidden'}} >00:00</Time>
-                        <Place>{props.place}</Place>
-                    </Line2>
+                        <PlaceWrapper>
+                            <Location style={{marginRight:'0.42rem'}}></Location>
+                            <Place>{props.place}</Place>
+                        </PlaceWrapper>
+                        
+                    </Line2> */}
                 </SimpleInfoWrapper>
     );
   }
 
 const SimpleInfoWrapper = styled.div`
     display:flex;
-    flex-direction:column;
-
-    width:100%;
+    flex-direction:row;
+    align-items:center;
+`
+const Date = styled.div`
+    width: fit-content;
     height: fit-content;
+    font-family: NotoSansCJKkr;
+    font-size: 1.9rem;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.89;
+    letter-spacing: normal;
+    text-align: center;
+    color: #2e9267;
+`
+
+const ActivityWrapper = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+`
+const Label = styled.div`
+    width:fit-content;
+    height:fit-content;
+    font-family: NotoSansCJKkr;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.47;
+    letter-spacing: normal;
+    text-align: center;
+    color: #2e9267;
 `
 
 const Line1 = styled.div`
@@ -63,19 +114,18 @@ const Time = styled.div`
     width: fit-content;
     height: fit-content;
     font-family: NotoSansCJKkr;
-    font-size: 1.6rem;
+    font-size: 1.9rem;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.25;
+    line-height: 1.89;
     letter-spacing: normal;
     text-align: center;
     color: #2e9267;
-    margin-right:1.8rem;
 `
 
 const RoomTitle = styled.div`
-    width: fit-content;
+    width: 21.1rem;
     height: fit-content;
     font-family: NotoSansCJKkr;
     font-size: 1.6rem;
@@ -88,7 +138,14 @@ const RoomTitle = styled.div`
     color: #2e9267;
 `
 
-const Place = styled.div`
+const PlaceWrapper = styled.div`
+    display:flex;
+    flex-direction:row;
+    width: fit-content;
+    height: fit-content;
+` 
+
+const Place = styled.span`
     width: fit-content;
     height: fit-content;
     font-family: NotoSansCJKkr;
@@ -101,5 +158,22 @@ const Place = styled.div`
     text-align: center;
     color: #2e9267;
 ` 
-
+const Bowling = styled.img`
+    width:3.1rem;
+    height:3.1rem;
+    margin-right:1.5rem;
+`
+const BoardGame = styled.img`
+    width:3.1rem;
+    height:3.1rem;
+    margin-right:1.5rem;
+`
+const EscapeRoom = styled.img`
+    width:3.1rem;
+    height:3.1rem;
+    margin-right:1.5rem;
+`
+const Day = styled.span`
+    font-size:1.6rem;
+`
 export default SimpleInfo

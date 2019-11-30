@@ -1,25 +1,38 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import Link from 'next/link';
+import styled, { css } from 'styled-components';
 
-import BoardGameIcon from "../icons/boardGame";
-
-const BoardGame = () => {
+const MainExplanation = (props) => {
     return (
-                <Wrapper>
-                    <BoardGameIcon style={{width:'6.4rem',height:'6.4rem'}}></BoardGameIcon>
-                    <Label>보드게임</Label>
-                </Wrapper>
+                        <BoardGameWrapper>
+                            <BoardGame src={'/boardGame.png'}/>
+                            <BoardGameLabel>보드게임</BoardGameLabel>
+                        </BoardGameWrapper>
     );
   }
-  
-const Wrapper = styled.div`
+
+
+const BoardGameWrapper = styled.div`
     display:flex;
     flex-direction:column;
-    width:fit-content;
-    height:fit-content;
+    justify-content:space-between;
+    width:7.1rem;
+    height:9.5rem;
+
+    margin-top:0.8rem;
+    margin-left:0.6rem;
+    margin-right:0.6rem;
+    margin-bottom:0.74rem;
 `
-const Label = styled.div`
-    width: 2.6rem;
+
+const BoardGame = styled.img`
+    width:7.0rem;
+    height:7.1rem;
+`
+
+const BoardGameLabel = styled.div`
+    margin-left:0.8rem;
+    width: fit-content;
     height: 2rem;
     font-family: NotoSansCJKkr;
     font-size: 1.4rem;
@@ -32,4 +45,5 @@ const Label = styled.div`
     color: #2e9267;
 `
 
-export default BoardGame
+
+export default MainExplanation

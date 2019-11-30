@@ -4,8 +4,24 @@ import Link from 'next/link'
 import GotoRoomByDate from '../../atoms/buttons/texts/gotoRoomsByDate';
 
 const gotoRoomByDate = () => {
+
+    const now = new Date();
+    const nowYear = now.getFullYear();
+    const nowMonth = now.getMonth()+1;
+    const nowDate = now.getDate();
+
+    if(nowDate.toString().length===1){
+        var refinedDate = 0+nowDate.toString();
+    }
+    else{
+        var refinedDate = nowDate.toString();
+    }
+
+    const date=`${nowYear}-${nowMonth}-${refinedDate}`;
+
     return(
-        <Link href='/roomsByDate'><a style={{textDecoration:'none'}}>
+        <Link href={{ pathname: 'roomsByDate', query: { date: `${date}` }}}>
+            <a style={{textDecoration:'none'}}>
             <GotoRoomByDate></GotoRoomByDate>
         </a></Link>
     );

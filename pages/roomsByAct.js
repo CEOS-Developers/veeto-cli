@@ -4,10 +4,8 @@ import styled from 'styled-components';
 import Link from 'next/link'
 
 import PageHeader from '../components/organisms/PageHeader'
-import RoomsChooseDate from '../components/organisms/RoomsChooseDate'
-import RoomListByDate from '../components/organisms/RoomListByDate'
-import MainSchedule from '../components/organisms/MainSchedule'
-import MainFooter from '../components/organisms/MainFooter'
+import RoomsChooseAct from '../components/organisms/RoomsChooseAct'
+import RoomListByAct from '../components/organisms/RoomListByAct'
 
 const Wrapper = styled.div`
     width: 100%;
@@ -18,10 +16,8 @@ const Wrapper = styled.div`
 `
 
 
-const RoomsByDate = () => {
+const RoomsByAct = () => {
 
-  const [isOpen, setOpen] = useState(false)
-  
   return (
     <div style={{width:'100%', position:'relative'}}>
       <Head>
@@ -35,11 +31,14 @@ const RoomsByDate = () => {
       <Wrapper>
       <PageHeader></PageHeader>
       <RepresentativeImg style={{marginTop:"7.6rem"}} src={'/representative.png'}/>
-      <RoomsChooseDate></RoomsChooseDate>
-      <RoomListByDate></RoomListByDate>
-      {/* <MainFooter></MainFooter> */}
+      <RoomsChooseAct></RoomsChooseAct>
+      <RoomListByAct></RoomListByAct>
       </Wrapper>
       </div>); 
+}
+
+RoomsByAct.getInitialProps = () => {
+  return {};
 }
 
 const RepresentativeImg = styled.img`
@@ -51,4 +50,4 @@ const RepresentativeImg = styled.img`
     margin-bottom:3.1rem;
 `
 
-export default RoomsByDate
+export default RoomsByAct

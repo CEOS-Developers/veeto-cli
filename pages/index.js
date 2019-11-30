@@ -1,14 +1,10 @@
 import React, {useState} from 'react'
 import Head from 'next/head'
 import styled from 'styled-components';
-import Link from 'next/link'
 
-import PageHeader from '../components/organisms/PageHeader'
 import MainExplanation from '../components/organisms/MainExplanation'
-import LeavesSeparator from '../components/atoms/icons/leavesSeparator'
-import MainChooseMethod from '../components/templates/MainChooseMethod'
-import MainSchedule from '../components/organisms/MainSchedule'
-import MainFooter from '../components/organisms/MainFooter'
+import TutorialSlider from '../components/organisms/Tutorial';
+import Start from '../components/molecules/buttons/Start';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -34,12 +30,9 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Wrapper>
-      <PageHeader></PageHeader>
-      <MainExplanation isOpen={isOpen}/>
-      <LeavesSeparator style={{marginBottom:'2.2rem'}}></LeavesSeparator>
-      <MainChooseMethod></MainChooseMethod>
-      {/* <MainSchedule setOpen={setOpen}/> */}
-      {/* <MainFooter></MainFooter> */}
+      <MainExplanation tutorial={true} isOpen={isOpen}/>
+      <TutorialSlider></TutorialSlider>
+      <Start></Start>
       </Wrapper>
       </div>); 
 }

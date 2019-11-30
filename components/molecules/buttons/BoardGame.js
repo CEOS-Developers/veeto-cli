@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
 import styled from 'styled-components';
+import Link from 'next/link'
 
-import BoardGame from "../../atoms/buttons/icons+text/boardGame";
+import BoardGame from '../../atoms/buttons/icons+text/boardGame'
 
-const BoardGameText = () => {
+const boardGame = (props) => {
     return (
-        <Link href='/RoomsChooseAct'><a>
-            <BoardGame></BoardGame>
-        </a></Link>
+        <Link href={{ pathname: 'roomsByAct', query: { activity: '2' }}}>
+        <a style={{textDecoration:'none'}}>
+                    <BoardGame></BoardGame>
+                </a>
+            </Link>
     );
   }
-
-export default BoardGameText
+  
+export default boardGame

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
-import BoardGame from '../molecules/buttons/BoardGame';
+import ActivityTab from '../organisms/ActivityTab';
 
 const MainExplanation = (props) => {
     return (
@@ -12,44 +12,7 @@ const MainExplanation = (props) => {
                     <span style={{fontFamily: 'NotoSansCJKkr', fontWeight: '500'}}>활동을</span>
                     <span> 선택하기</span>
                 </ServicePhrase2>
-                <ActivitiesWrapper>
-                       <BoardGame></BoardGame>
-                       <BoardGame></BoardGame>
-                       <BoardGame></BoardGame>
-                </ActivitiesWrapper>
-
-                {/* {!props.isOpen && (
-                    <>
-                <Text size={1.5625} weight={300} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                        숫자를 선택해주세요.</Text>
-                <ActivitiesWrapper>
-                    <ActivityWrapper>
-                        <Bowling></Bowling>
-                        <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                            볼링</Text>
-                    </ActivityWrapper>
-                    <ActivityWrapper>
-                        <BoardGame></BoardGame>
-                        <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                            보드게임</Text>
-                    </ActivityWrapper>
-                    <ActivityWrapper>
-                        <EscapeRoom></EscapeRoom>
-                        <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47} position={'relative'} right={0.85}>
-                            방탈출</Text>
-                    </ActivityWrapper>
-                </ActivitiesWrapper>    
-                </>)}
-                {props.isOpen && (
-                    <>
-                <selectedActivitiyWrapper>
-                    <ActivityWrapper>
-                        <Bowling></Bowling>
-                        <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                            볼링</Text>
-                    </ActivityWrapper>
-                </selectedActivitiyWrapper>    
-                </>)} */}
+                <ActivityTab></ActivityTab>
             </MainChooseActWrapper>
         </Wrapper>
     );
@@ -103,6 +66,125 @@ const ActivitiesWrapper = styled.div`
     width:fit-content;
     height:fit-content;
     overflow:auto;
+`
+
+const SelectedActivityWrapper = styled.div`
+    border-radius: 0.7rem;
+    background-color: ${props => props.selected ? '#deefe7' : ''};;
+    width:fit-content;
+    height:fit-content;
+`
+
+const ActivityWrapper = styled.div`
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    width:7.1rem;
+    height:9.5rem;
+
+    margin-top:0.7rem;
+    margin-left:0.7rem;
+    margin-right:0.5rem;
+    margin-bottom:0.74rem;
+`
+
+const BowlingWrapper = styled.div`
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    width:7.1rem;
+    height:9.5rem;
+
+    margin-top:0.7rem;
+    margin-left:0.7rem;
+    margin-right:0.5rem;
+    margin-bottom:0.74rem;
+`
+
+const BoardGameWrapper = styled.div`
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    width:7.1rem;
+    height:9.5rem;
+
+    margin-top:0.7rem;
+    margin-left:0.7rem;
+    margin-right:0.5rem;
+    margin-bottom:0.74rem;
+`
+
+const EscapeRoomWrapper = styled.div`
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    width:7.1rem;
+    height:9.5rem;
+
+    margin-top:0.7rem;
+    margin-left:0.7rem;
+    margin-right:0.5rem;
+    margin-bottom:0.74rem;
+`
+
+const Bowling = styled.img`
+    width:7.1rem;
+    height:7.1rem;
+`
+
+const BowlingLabel = styled.div`
+    margin-left:2.2rem;
+    width: fit-content;
+    height: 2rem;
+    font-family: NotoSansCJKkr;
+    font-size: 1.4rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    text-align: center;
+    color: #2e9267;
+`
+
+const BoardGame = styled.img`
+    width:7.0rem;
+    height:7.1rem;
+`
+
+const BoardGameLabel = styled.div`
+    margin-left:0.8rem;
+    width: fit-content;
+    height: 2rem;
+    font-family: NotoSansCJKkr;
+    font-size: 1.4rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    text-align: center;
+    color: #2e9267;
+`
+
+const EscapeRoom = styled.img`
+    width:7.1rem;
+    height:7.1rem;
+`
+
+const EscapeRoomLabel = styled.div`
+    margin-left:1.4rem;
+    width: fit-content;
+    height: 2rem;
+    font-family: NotoSansCJKkr;
+    font-size: 1.4rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+    text-align: center;
+    color: #2e9267;
 `
 
 export default MainExplanation

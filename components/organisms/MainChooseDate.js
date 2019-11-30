@@ -4,32 +4,67 @@ import Link from 'next/link';
 
 import Day from '../molecules/buttons/Day';
 
-const week = ['일', '월', '화', '수', '목', '금', '토'];
+const now = new Date();
+const nowDate = now.getDate();
+const nowYear = now.getFullYear();
+const nowMonth = now.getMonth()+1;
+const nowDay = now.getDay()+1;
+let divisor = 30;
+if(nowMonth===1 || nowMonth===3 || nowMonth===5 || nowMonth===7 || nowMonth===8 || nowMonth===10 || nowMonth===12){
+    divisor=31;
+}
+else if(nowMonth===2){
+    divisor=28;
+}
+
+const getMonth = () =>{
+    if((nowDate-nowDay)%divisor+1>divisor-20){
+        return(
+            <Month>
+                {nowMonth} - {nowMonth+1}월
+            </Month>
+        );
+    }
+    else{
+        return(
+            <Month>
+                {nowMonth}월
+            </Month>
+        );
+    }
+}
 
 const getDateLines = () => {
-    const now = new Date();
-    const nowDate = now.getDate();
-    const nowDay = now.getDay();
-    if(nowDay===0){
+
+    if(nowDay===1){
         return(
             <DaysWrapper>
                 <DaysRow>
-                    <Day value={nowDate}></Day>
-                    <Day value={nowDate+1}></Day>
-                    <Day value={nowDate+2}></Day>
-                    <Day value={nowDate+3}></Day>
-                    <Day value={nowDate+4}></Day>
-                    <Day value={nowDate+5}></Day>
-                    <Day value={nowDate+6}></Day>
+                    <DayIndicator>일</DayIndicator>
+                    <DayIndicator>월</DayIndicator>
+                    <DayIndicator>화</DayIndicator>
+                    <DayIndicator>수</DayIndicator>
+                    <DayIndicator>목</DayIndicator>
+                    <DayIndicator>금</DayIndicator>
+                    <DayIndicator>토</DayIndicator>
                 </DaysRow>
                 <DaysRow>
-                    <Day value={nowDate+7}></Day>
-                    <Day value={nowDate+8}></Day>
-                    <Day value={nowDate+9}></Day>
-                    <Day value={nowDate+10}></Day>
-                    <Day value={nowDate+11}></Day>
-                    <Day value={nowDate+12}></Day>
-                    <Day value={nowDate+13}></Day>
+                    <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-1)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+1)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+2)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+3)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+4)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+5)%divisor+1}></Day>
+                </DaysRow>
+                <DaysRow>
+                    <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate+6)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+7)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+8)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+9)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+10)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+11)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate+12)%divisor+1}></Day>
                 </DaysRow>
             </DaysWrapper>
         );
@@ -38,31 +73,40 @@ const getDateLines = () => {
         return(
             <DaysWrapper>
                 <DaysRow>
-                    <Day value={nowDate-nowDay}></Day>
-                    <Day value={nowDate-(nowDay-1)}></Day>
-                    <Day value={nowDate-(nowDay-2)}></Day>
-                    <Day value={nowDate-(nowDay-3)}></Day>
-                    <Day value={nowDate-(nowDay-4)}></Day>
-                    <Day value={nowDate-(nowDay-5)}></Day>
-                    <Day value={nowDate-(nowDay-6)}></Day>
+                    <DayIndicator sunday={true}>일</DayIndicator>
+                    <DayIndicator>월</DayIndicator>
+                    <DayIndicator>화</DayIndicator>
+                    <DayIndicator>수</DayIndicator>
+                    <DayIndicator>목</DayIndicator>
+                    <DayIndicator>금</DayIndicator>
+                    <DayIndicator>토</DayIndicator>
                 </DaysRow>
                 <DaysRow>
-                    <Day sunday={true} value={nowDate-(nowDay-7)}></Day>
-                    <Day value={nowDate-(nowDay-8)}></Day>
-                    <Day value={nowDate-(nowDay-9)}></Day>
-                    <Day value={nowDate-(nowDay-10)}></Day>
-                    <Day value={nowDate-(nowDay-11)}></Day>
-                    <Day value={nowDate-(nowDay-12)}></Day>
-                    <Day value={nowDate-(nowDay-13)}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-nowDay)%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-1))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-2))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-3))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-4))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-5))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-6))%divisor+1}></Day>
                 </DaysRow>
                 <DaysRow>
-                    <Day sunday={true} value={nowDate-(nowDay-14)}></Day>
-                    <Day value={nowDate-(nowDay-15)}></Day>
-                    <Day value={nowDate-(nowDay-16)}></Day>
-                    <Day value={nowDate-(nowDay-17)}></Day>
-                    <Day value={nowDate-(nowDay-18)}></Day>
-                    <Day value={nowDate-(nowDay-19)}></Day>
-                    <Day value={nowDate-(nowDay-20)}></Day>
+                    <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-(nowDay-7))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-8))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-9))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-10))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-11))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-12))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-13))%divisor+1}></Day>
+                </DaysRow>
+                <DaysRow>
+                    <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-(nowDay-14))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-15))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-16))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-17))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-18))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-19))%divisor+1}></Day>
+                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-20))%divisor+1}></Day>
                 </DaysRow>
             </DaysWrapper>
         );
@@ -79,9 +123,7 @@ const MainChooseDate = (props) => {
                     <span style={{fontFamily: 'NotoSansCJKkr', fontWeight: '500'}}>날짜를</span>
                     <span> 선택하기</span>
                 </Title>
-                <Month>
-                    11월
-                </Month>
+                {getMonth()}
                 {getDateLines()}
                 {/* {!props.isOpen && (
                     <>
@@ -189,5 +231,20 @@ const DaysRow = styled.div`
     align-items:center;
 `
 
+const DayIndicator = styled.div`
+    width: 2.6rem;
+    height: 2.9rem;
+    font-family: NotoSansCJKkr;
+    font-size: 1.8rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2;
+    letter-spacing: normal;
+    text-align: center;
+    color: ${props => props.sunday? '#b46b16' : '#61b28f'};
+    margin-bottom:1.5rem;
+`
 
-export { getDateLines, MainChooseDate };
+
+export { getMonth, getDateLines, MainChooseDate};

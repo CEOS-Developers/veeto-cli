@@ -22,7 +22,7 @@ const HeaderWrapper = styled.div`
     width:91%;
     display:flex;
     flex-direction:row;
-    justify-content:space-between;
+    justify-content:center;
 
 `
 
@@ -30,9 +30,7 @@ const PageHeader = () => {
     return (
         <Wrapper>
             <HeaderWrapper>
-                <Drawer></Drawer>
                 <Home></Home>
-                <Shop></Shop>
             </HeaderWrapper>
         </Wrapper>
     );

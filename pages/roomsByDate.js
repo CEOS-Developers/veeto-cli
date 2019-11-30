@@ -19,8 +19,6 @@ const Wrapper = styled.div`
 
 
 const RoomsByDate = () => {
-
-  const [isOpen, setOpen] = useState(false)
   
   return (
     <div style={{width:'100%', position:'relative'}}>
@@ -37,9 +35,12 @@ const RoomsByDate = () => {
       <RepresentativeImg style={{marginTop:"7.6rem"}} src={'/representative.png'}/>
       <RoomsChooseDate></RoomsChooseDate>
       <RoomListByDate></RoomListByDate>
-      {/* <MainFooter></MainFooter> */}
       </Wrapper>
       </div>); 
+}
+
+RoomsByDate.getInitialProps = () => {
+      return {};
 }
 
 const RepresentativeImg = styled.img`

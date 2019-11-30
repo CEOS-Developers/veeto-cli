@@ -6,7 +6,7 @@ import LeavesIcon from "../../atoms/buttons/icons/home";
 
 const Drawer = () => {
     return (
-            <Link href='/'>
+            <Link href='/main'>
                 <a>
                     <LeavesIcon></LeavesIcon>
                 </a>
