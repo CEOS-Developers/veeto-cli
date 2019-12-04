@@ -5,21 +5,82 @@ import PageHeader from '../organisms/PageHeader'
 import Camera from '../atoms/buttons/icons/camera';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
+import { useMutation } from "../../lib/hooks"
+import axios from 'axios'
 
 
 const SignIn1 = (props) => {
-    const [isGenderSelected, setGenderSelected] = useState(0);
+    const [inputName, setInputName] = useState("");
+    const [isGenderSelected, setGenderSelected] = useState("");
+    const [inputPhoneNum, setInputPhoneNum] = useState("");
     const [isUnivSelected, setUnivSelected] = useState(0);
+    const [inputNickName, setInputNickName] = useState("");
+    const [inputAge, setInputAge] = useState();
     const [isPreferGenderSelected, setPreferGenderSelected] = useState(0);
+    const [inputImageSrc, setInputImageSrc] = useState("");
+    const [inputImageStr, setInputImageStr] = useState("");
 
     const router = useRouter();
     const { date } = router.query;
     const { time } = router.query;
     const { activity } = router.query;
 
+    const handleUpload = e => {
+        const file = e.target.files[0];
+        setInputImageSrc(file);
+        let reader = new FileReader();
+        reader.onloadend = () => {
+            console.log("load end");
+          setInputImageStr(reader.result);
+        };
+        reader.readAsDataURL(file);
+      };
+
+
+    const handleImgSubmit = (e) => {
+        const sImg = new Blob([inputImageSrc]);
+        e.preventDefault();
+        console.log(inputImageSrc);
+        let form_data = new FormData();
+        form_data.append('image', sImg, sImg.name);
+        let url = 'https://d2gv8trg60k042.cloudfront.net/accounts/auth/';
+        axios.post(url, form_data, {
+          headers: {
+            'content-type': 'multipart/form-data'
+          }
+        })
+            .then(res => {
+              console.log(res.data);
+            })
+            .catch(err => console.log(err))
+      };
+
+
+      const imgFunc = e => {
+        handleUpload(e);
+        handleImgSubmit(e);
+    }
+
+
+    const handleSubmit = () => {
+        const result = useMutation('https://d2gv8trg60k042.cloudfront.net/accounts/userForm/',{
+            user_name : inputName,
+            gender : isGenderSelected,
+            phone_num : inputPhoneNum,
+            university : isUnivSelected,
+            user_nickname : inputNickName,
+            age : Number(inputAge),
+            desired_gender_ratio : isPreferGenderSelected,
+            // studentCard_image : inputImageSrc,
+            date : date,
+            time : time,
+            activity : Number(activity)
+        });
+        console.log("success!")
+    }
+
     return (
         <>
-        <form onSubmit={() => setUrl('https://d2gv8trg60k042.cloudfront.net/accounts/userForm')}>
             <Wrapper>
                 <SignWrapper>
                     <Title>신청 폼 작성</Title>
@@ -27,20 +88,19 @@ const SignIn1 = (props) => {
                         <RowWrapper>
                             <FormWrapper>
                                 <FormTitle>이름</FormTitle>
-                                <FormInput width={'14rem'} type="text" name="user_name"></FormInput>
+                                <FormInput width={'14rem'} type="text" id="user_name" name="user_name" value={inputName} onChange={(e) => {setInputName(e.target.value)}} required></FormInput>
                             </FormWrapper>
                             <FormWrapper>
                                 <FormTitle>성별</FormTitle>
-                                <input type="hidden" id="gender" name="gender" value={isGenderSelected}></input>
+                                <input type="hidden" id="gender" name="gender" value={isGenderSelected} required></input>
                                 <RowWrapper>
-                                    <Male selected={isGenderSelected} onClick={() => setGenderSelected(1)} style={{marginRight:'0.3rem'}}>남</Male>
-                                    <Female selected={isGenderSelected} onClick={() => setGenderSelected(2)}>여</Female>
+                                    <Male selected={isGenderSelected} onClick={() => setGenderSelected("M")} style={{marginRight:'0.3rem'}}>남</Male>
+                                    <Female selected={isGenderSelected} onClick={() => setGenderSelected("F")}>여</Female>
                                 </RowWrapper>
                             </FormWrapper>
                         </RowWrapper>
-
                                 <FormTitle>휴대폰 번호</FormTitle>
-                                <FormInput  width={'100%'} type="text" name="phone_num" minLength="11" maxLength="11" placeholder="- 없이 숫자만 입력"></FormInput>
+                                <FormInput width={'100%'} type="text" id="phone_num" name="phone_num" value={inputPhoneNum} onChange={(e) => {setInputPhoneNum(e.target.value)}} minLength="11" maxLength="11" placeholder="- 없이 숫자만 입력" required></FormInput>
                     
                                 <FormTitle>학교</FormTitle>
                                 <input type="hidden" id="university" name="university" value={isUnivSelected}></input>
@@ -55,11 +115,11 @@ const SignIn1 = (props) => {
                                 <RowWrapper>
                                     <FormWrapper>
                                         <FormTitle>닉네임</FormTitle>
-                                        <FormInput width={'20.5rem'} type="text" name="user_nickname" maxLength="5" placeholder="5자 이내"></FormInput>
+                                        <FormInput width={'20.5rem'} type="text" id="user_nickname" name="user_nickname" value={inputNickName} onChange={(e) => {setInputNickName(e.target.value)}} maxLength="5" placeholder="5자 이내"></FormInput>
                                     </FormWrapper>
                                     <FormWrapper>
                                         <FormTitle>나이</FormTitle>
-                                            <FormInput width={'7.3rem'} type="text" name="age" maxLength="2"></FormInput>
+                                            <FormInput width={'7.3rem'} type="text" id="age" name="age" value={inputAge} onChange={(e) => {setInputAge(e.target.value)}} maxLength="2"></FormInput>
                                         </FormWrapper>
                                 </RowWrapper>
 
@@ -75,26 +135,30 @@ const SignIn1 = (props) => {
                                 <FormTitle>학교 인증하기</FormTitle>
                                 <label for="studentCard_image">
                                     <InputBox>
-                                        <BoxTitle>학생증 첨부하기</BoxTitle>
-                                        <Camera></Camera>
-                                        <Caution>
-                                            모든 부분이 다 보이게 찍어주세요!<br/>
-                                            확인이 되지 않는다면 재요청 문자가 전송될 수 있습니다.
-                                        </Caution>
+                                        <NotUploaded uploaded={inputImageStr}>
+                                            <BoxTitle>학생증 첨부하기</BoxTitle>
+                                            <Camera></Camera>
+                                            <Caution>
+                                                모든 부분이 다 보이게 찍어주세요!<br/>
+                                                확인이 되지 않는다면 재요청 문자가 전송될 수 있습니다.
+                                            </Caution>
+                                        </NotUploaded>
+                                        <Uploaded uploaded={inputImageStr}>
+                                            <StudentCardImg src={inputImageStr}></StudentCardImg>
+                                        </Uploaded>
                                     </InputBox>
                                 </label>
-                                <input width={'100%'} type="file" id="studentCard_image" name="studentCard_image" style={{display:'none'}}></input>
+                                <input width={'100%'} type="file" id="studentCard_image" name="studentCard_image" onChange={imgFunc} style={{display:'none'}}></input>
 
                                 <input type="hidden" id="date" name="date" value={date}></input>
                                 <input type="hidden" id="time" name="time" value={time}></input>
                                 <input type="hidden" id="activity" name="activity" value={activity}></input>
                     </FormsWrapper>
                     <Link href="/done"><a>
-                        <Submit type="submit">제출하기</Submit>
+                        <Submit onClick={handleSubmit}>제출하기</Submit>
                     </a></Link>
                 </SignWrapper>
                 </Wrapper>
-                </form>
                 </>
     );
   }
@@ -210,7 +274,7 @@ const Male = styled.div`
     border-radius: 2rem;
 
     ${props => {
-        if(props.selected===1){
+        if(props.selected==="M"){
             return css `background-color:#2e9267`;
         }
         else{
@@ -219,12 +283,12 @@ const Male = styled.div`
     };
     
     ${props => {
-        if(!(props.selected===1)){
+        if(!(props.selected==="M")){
             return css `opacity:0.55`;
         }}
     };
     ${props => {
-        if(props.selected===1){
+        if(props.selected==="M"){
             return css `color:#ffffff`;
         }
         else{
@@ -247,7 +311,7 @@ const Female = styled.div`
     border-radius: 2rem;
 
     ${props => {
-        if(props.selected===2){
+        if(props.selected==="F"){
             return css `background-color:#2e9267`;
         }
         else{
@@ -256,12 +320,12 @@ const Female = styled.div`
     };
     
     ${props => {
-        if(!(props.selected===2)){
+        if(!(props.selected==="F")){
             return css `opacity:0.55`;
         }}
     };
     ${props => {
-        if(props.selected===2){
+        if(props.selected==="F"){
             return css `color:#ffffff`;
         }
         else{
@@ -601,7 +665,8 @@ const InputBox = styled.div`
     align-items:center;
 
     width:100%;
-    height: 12.7rem;
+    min-height: 12.7rem;
+    height:fit-content;
     border-radius: 1rem;
     border:none;
     background-color: rgba(219, 242, 234, 0.55);
@@ -628,6 +693,7 @@ const BoxTitle = styled.div`
     letter-spacing: normal;
     text-align: center;
     color: #93cbb3;
+    margin-top:1.6rem;
     margin-bottom:0.9rem;
 `
 
@@ -644,5 +710,27 @@ const Caution = styled.div`
     text-align: center;
     color: #2e9267;
     margin-top:1.13rem;
+`
+
+const StudentCardImg = styled.img`
+    width:95%;
+    height:auto;
+    padding:1rem;
+    margin-bottom:1rem;
+`
+
+const NotUploaded = styled.div`
+    display : flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    height:fit-content
+`
+const Uploaded = styled.div`
+    display : flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    height:fit-content;
 `
 export default SignIn1

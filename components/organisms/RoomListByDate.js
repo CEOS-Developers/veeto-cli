@@ -17,8 +17,10 @@ const RoomListByDate = (props) => {
     const [isModal5Open, setModal5Open] = useState(false); const closeModal5 = () => { setModal5Open(!isModal5Open); }
     const [isModal6Open, setModal6Open] = useState(false); const closeModal6 = () => { setModal6Open(!isModal6Open); }
 
-    // const [{data, isLoading, isError}, doFetch] = useDataApi(process.env.API_HOST + '/api/roomList/2019/11/24/');
-    const [{data, isLoading, isError}, doFetch] = useDataApi('https://d2gv8trg60k042.cloudfront.net/api/roomList/2019/11/24/');
+    const [realDay, setRealDay] = useState(0);
+    const updateDay = (n) => {
+        setCutDate(n);
+    }
 
     const router = useRouter();
     const { date } = router.query;
@@ -27,25 +29,24 @@ const RoomListByDate = (props) => {
         var month = date.slice(5,7);
         var ddate = date.slice(8,10);
     }
-    const day = 2;
 
 
     const getScheduleLines = () => {
         // return data.map((value, index) => {
             return(
                 <>  
-                    <RoomWrapper onClick={closeModal1}><EnterRoomByDate activity={1} year={year} month={month} date={ddate} day={day} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal1} isModalOpen={isModal1Open} year={year} month={month} date={ddate} day={day} activity={1} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal2}><EnterRoomByDate activity={2} year={year} month={month} date={ddate} day={day} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal2} isModalOpen={isModal2Open} year={year} month={month} date={ddate} day={day} activity={2} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal3}><EnterRoomByDate activity={3} year={year} month={month} date={ddate} day={day} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal3} isModalOpen={isModal3Open} year={year} month={month} date={ddate} day={day} activity={3} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal4}><EnterRoomByDate activity={1} year={year} month={month} date={ddate} day={day} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal4} isModalOpen={isModal4Open} year={year} month={month} date={ddate} day={day} activity={1} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal5}><EnterRoomByDate activity={2} year={year} month={month} date={ddate} day={day} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal5} isModalOpen={isModal5Open} year={year} month={month} date={ddate} day={day} activity={2} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal6}><EnterRoomByDate activity={3} year={year} month={month} date={ddate} day={day} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal6} isModalOpen={isModal6Open} year={year} month={month} date={ddate} day={day} activity={3} time={'19:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal1}><EnterRoomByDate fullDate={date} realDay={realDay} updateDay={updateDay} activity={1} year={year} month={month} date={ddate} time={'14:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal1} isModalOpen={isModal1Open} fullDate={date} realDay={realDay} updateDay={updateDay} year={year} month={month} date={ddate} activity={1} time={'14:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal2}><EnterRoomByDate fullDate={date} realDay={realDay} updateDay={updateDay} activity={2} year={year} month={month} date={ddate} time={'14:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal2} isModalOpen={isModal2Open} fullDate={date} realDay={realDay} updateDay={updateDay} year={year} month={month} date={ddate} activity={2} time={'14:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal3}><EnterRoomByDate fullDate={date} realDay={realDay} updateDay={updateDay} activity={3} year={year} month={month} date={ddate} time={'14:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal3} isModalOpen={isModal3Open} fullDate={date} realDay={realDay} updateDay={updateDay} year={year} month={month} date={ddate} activity={3} time={'14:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal4}><EnterRoomByDate fullDate={date} realDay={realDay} updateDay={updateDay} activity={1} year={year} month={month} date={ddate} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal4} isModalOpen={isModal4Open} fullDate={date} realDay={realDay} updateDay={updateDay} year={year} month={month} date={ddate} activity={1} time={'19:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal5}><EnterRoomByDate fullDate={date} realDay={realDay} updateDay={updateDay} activity={2} year={year} month={month} date={ddate} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal5} isModalOpen={isModal5Open} fullDate={date} realDay={realDay} updateDay={updateDay} year={year} month={month} date={ddate} activity={2} time={'19:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal6}><EnterRoomByDate fullDate={date} realDay={realDay} updateDay={updateDay} activity={3} year={year} month={month} date={ddate} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal6} isModalOpen={isModal6Open} fullDate={date} realDay={realDay} updateDay={updateDay} year={year} month={month} date={ddate} activity={3} time={'19:00'}></EnterRoomModal>
                     {/* <div onClick={() => setModalOpen(!isModalOpen)}>
                         <EnterRoomByDate activity={value.activity} time={value.time.slice(0,5)} room_name={value.room_name} place={value.place}></EnterRoomByDate>
                     </div>

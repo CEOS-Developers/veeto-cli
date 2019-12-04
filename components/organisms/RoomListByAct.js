@@ -23,8 +23,7 @@ const RoomListByDate = (props) => {
     const nowDate = now.getDate();
     const nowYear = now.getFullYear();
     const nowMonth = now.getMonth()+1;
-    const nowDay = now.getDay()+1;
-
+    const nowDay = now.getDay();
 
     const [isModalOpen, setModalOpen] = useState(false);
     const [{data, isLoading, isError}, doFetch] = useDataApi('https://d2gv8trg60k042.cloudfront.net/api/roomList/1');
@@ -35,18 +34,18 @@ const RoomListByDate = (props) => {
         // return data.map((value, index) => {
             return(
                 <>
-                    <RoomWrapper onClick={closeModal1}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal1} isModalOpen={isModal1Open} year={nowYear} month={nowMonth} date={nowDate} activity={activity} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal2}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+1} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal2} isModalOpen={isModal2Open} year={nowYear} month={nowMonth} date={nowDate+1} activity={activity} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal3}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+2} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal3} isModalOpen={isModal3Open} year={nowYear} month={nowMonth} date={nowDate+2} activity={activity} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal4}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+3} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal4} isModalOpen={isModal4Open} year={nowYear} month={nowMonth} date={nowDate+3} activity={activity} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal5}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+4} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal5} isModalOpen={isModal5Open} year={nowYear} month={nowMonth} date={nowDate+4} activity={activity} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal6}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+5} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal6} isModalOpen={isModal6Open} year={nowYear} month={nowMonth} date={nowDate+5} activity={activity} time={'19:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal1}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate} day={nowDay%7} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal1} isModalOpen={isModal1Open} year={nowYear} month={nowMonth} date={nowDate} day={nowDay%7} activity={activity} time={'19:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal2}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+1} day={(nowDay+1)%7} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal2} isModalOpen={isModal2Open} year={nowYear} month={nowMonth} date={nowDate+1} day={(nowDay+1)%7} activity={activity} time={'19:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal3}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+2} day={(nowDay+2)%7} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal3} isModalOpen={isModal3Open} year={nowYear} month={nowMonth} date={nowDate+2} day={(nowDay+2)%7} activity={activity} time={'19:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal4}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+3} day={(nowDay+3)%7} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal4} isModalOpen={isModal4Open} year={nowYear} month={nowMonth} date={nowDate+3} day={(nowDay+3)%7} activity={activity} time={'19:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal5}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+4} day={(nowDay+4)%7} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal5} isModalOpen={isModal5Open} year={nowYear} month={nowMonth} date={nowDate+4} day={(nowDay+4)%7} activity={activity} time={'19:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal6}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+5} day={(nowDay+5)%7} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal6} isModalOpen={isModal6Open} year={nowYear} month={nowMonth} date={nowDate+5} activity={activity} day={(nowDay+5)%7} time={'19:00'}></EnterRoomModal>
                 </>
             );
         // })

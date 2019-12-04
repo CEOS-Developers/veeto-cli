@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const ParticipantInfo = () => {
+const ParticipantInfo = (props) => {
+    const {member} = props;
+
     return (
-        <Wrapper>
+        <Wrapper me={props.me}>
             <RowWrapper style={{marginBottom:'5.5rem'}}>
-                <NameAge>유민, 21</NameAge>
-                <Gender>남</Gender>
-            </RowWrapper>
-            <RowWrapper>
-                <Blank></Blank>
-                <Univ>홍익대학교</Univ>
+                <NameAge me={props.me}>{member.user_nickname}, {member.age}</NameAge>
+                <Gender>{member.gender}</Gender>
+                        </RowWrapper>
+                        <RowWrapper>
+                            <Blank></Blank>
+                <Univ me={props.me}>{member.university}</Univ>
             </RowWrapper>
         </Wrapper>
     );
@@ -22,6 +24,7 @@ const Wrapper = styled.div`
     border-radius: 1rem;
     border: solid 0.2rem #61b28f;
 
+    background-color: ${props => props.me ? '#61b28f': '#ffffff'};
     padding-top:0.8rem; padding-bottom:0.8rem;
     padding-left:1rem; padding-right:1rem;
     
@@ -46,7 +49,7 @@ const NameAge = styled.span`
     line-height: 2.4;
     letter-spacing: normal;
     text-align: center;
-    color: #2e9267;
+    color: ${props => props.me ? '#ffffff' : '#2e9267'};
 `
 const Gender = styled.span`
     width: fit-content;
@@ -78,6 +81,6 @@ const Univ = styled.div`
     line-height: 3;
     letter-spacing: normal;
     text-align: center;
-    color: #61b28f;
+    color: ${props => props.me ? '#ffffff' : '#2e9267'};
 `
 export default ParticipantInfo

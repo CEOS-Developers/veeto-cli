@@ -1,43 +1,49 @@
-import React, { useState, Component } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link'
-
+import { useRouter } from 'next/router'
 import Location from '../../atoms/icons/location'
 
 const SimpleInfo = (props) => {
+    const router = useRouter();
+    const { date } = router.query;
+    
+    const alterDate = props.fullDate;
+    console.log(alterDate);
+
+    const dayList = ['일','월','화','수','목','금','토'];
+    // const [myFullDate, setMyFullDate] = useState(null);
+    useEffect(() => {
+        // setMyFullDate( new window.Date(alterDate));
+        props.updateDay(props.fullDate.getDay());
+    },[])
 
     const icon = () =>{
         if(props.activity==1){
             return(<ActivityWrapper>
             <Bowling src={'/bowling.png'} style={{width:'5.7rem',height:'5.7rem',marginRight:'0rem'}}/>
-            <Label style={{marginRight:'6.4rem'}}>볼링</Label>
+            <Label style={{marginRight:'5.4rem'}}>볼링</Label>
             </ActivityWrapper>);
         }
         else if(props.activity==2){
             return(<ActivityWrapper>
             <BoardGame src={'/boardGame.png'} style={{width:'5.7rem',height:'5.7rem',marginRight:'0.5rem'}}/>
-            <Label style={{marginRight:'3.1rem'}}>보드게임</Label>
+            <Label style={{marginRight:'2.1rem'}}>보드게임</Label>
             </ActivityWrapper>);
         }
         else if(props.activity==3){
             return(<ActivityWrapper>
             <EscapeRoom src={'/escapeRoom.png'} style={{width:'5.7rem',height:'5.7rem',marginRight:'0.9rem'}}/>
-            <Label style={{marginRight:'4.1rem'}}>방탈출</Label>
+            <Label style={{marginRight:'3.1rem'}}>방탈출</Label>
             </ActivityWrapper>);
         }
     }
 
-    if(props.date.toString().length===1){
-        var refinedDate = 0+props.date.toString();
-    }
-    else{
-        var refinedDate = props.date.toString();
-    }
-
     return (
                 <SimpleInfoWrapper>
-
-                <Date style={{marginRight:'3.2rem'}}>{props.month}/{refinedDate}</Date>
+                <Date style={{marginRight:'1rem'}}>{props.month}/{props.date}</Date>
+                {props.day && <Date style={{marginRight:'1.5rem'}}>{dayList[props.day]}</Date>}
+                <Date style={{marginRight:'1.5rem'}}>{dayList[props.realDay]}</Date>
                 {icon()}
                 <Time>{props.time}</Time>
                     {/* <Line1>
