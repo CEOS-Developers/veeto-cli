@@ -36,16 +36,15 @@ const SignIn1 = (props) => {
       };
 
     const handleImgSubmit = (e) => {
+        // e.preventDefault();
         const axios = require('axios');
         const FormData = require('form-data');
 
         const form_data = new FormData();
-        form_data.append('image', inputImageSrc, 'image');
+        form_data.append('image', inputImageSrc);
         console.log(form_data);
         let url = 'https://d2gv8trg60k042.cloudfront.net/accounts/auth/';
-        axios.post(url, form_data, {
-          headers: form_data.getHeaders(),
-        })
+        axios.post(url, form_data)
             .then(res => {
               console.log(res.data);
             })
@@ -80,7 +79,7 @@ const SignIn1 = (props) => {
 
       const imgFunc = e => {
         handleUpload(e);
-        handleImgSubmit(e);
+       // handleImgSubmit(e);
     }
 
 

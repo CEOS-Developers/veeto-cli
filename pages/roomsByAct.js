@@ -30,7 +30,6 @@ const RoomsByAct = () => {
       </Head>
       <Wrapper>
       <PageHeader></PageHeader>
-      <RepresentativeImg style={{marginTop:"7.6rem"}} src={'/representative.png'}/>
       <RoomsChooseAct></RoomsChooseAct>
       <RoomListByAct></RoomListByAct>
       </Wrapper>

@@ -24,7 +24,7 @@ const EnterRoomModal = (props) => {
               <>
                          <ModalOverLay/>
                          <Modal>
-                         <EnterRoomByDate fullDate={props.fullDate} updateFullDate={props.updateFullDate} activity={props.activity} time={props.time}></EnterRoomByDate>
+                         <EnterRoomByDate fullDate={props.fullDate} updateFullDate={props.updateFullDate} month={props.month} date={props.date} day={props.day} activity={props.activity} time={props.time}></EnterRoomByDate>
                          
                          <Link href={{ pathname: 'hi', query: { date:`${props.fullDate}`, time:`${props.time}`, activity:`${props.activity}`}}}><a>
                             <ApplyButt>참여 신청하기</ApplyButt>
@@ -109,7 +109,7 @@ const EnterRoomModal = (props) => {
     opacity:1;
 
     position: fixed;
-    top: 60%;
+    top: 63%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 3rem;

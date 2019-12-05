@@ -25,7 +25,6 @@ const SimpleInfo = (props) => {
             refinedDate = '0'+props.date.toString();
         };
     
-        console.log(refinedDate.length);
     }
 
     const icon = () =>{

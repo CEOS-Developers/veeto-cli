@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     letter-spacing: normal;
     text-align: center;
     color: #2e9267;
-    margin-bottom:2.1rem;
+    margin-bottom:8.8rem;
 `
 const Bold = styled.span`
     font-family: NotoSansCJKkr;
