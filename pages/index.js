@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import MainExplanation from '../components/organisms/MainExplanation'
 import TutorialSlider from '../components/organisms/Tutorial';
 import Start from '../components/molecules/buttons/Start';
+import KakaoTalk from '../components/molecules/buttons/KakaoTalk';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -33,6 +34,7 @@ const Home = () => {
       <MainExplanation tutorial={true} isOpen={isOpen}/>
       <TutorialSlider></TutorialSlider>
       <Start></Start>
+      <KakaoTalk></KakaoTalk>
       </Wrapper>
       </div>); 
 }

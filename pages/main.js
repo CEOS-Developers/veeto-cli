@@ -35,7 +35,7 @@ const Home = () => {
       </Head>
       <Wrapper>
       <PageHeader></PageHeader>
-      <MainExplanation isOpen={isOpen}/>
+      <MainExplanation />
       <LeavesSeparator style={{marginBottom:'2.2rem'}}></LeavesSeparator>
       <MainChooseMethod></MainChooseMethod>
       </Wrapper>

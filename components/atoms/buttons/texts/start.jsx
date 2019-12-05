@@ -20,7 +20,7 @@ const Wrapper = styled.div`
     height: 3.8rem;
     border-radius: 2rem;
     border: solid 3px #61b38f;
-    margin-bottom:11.5rem;
+    margin-bottom:1.1rem;
 `
 const Text = styled.div`
     font-family: NotoSansCJKkr;

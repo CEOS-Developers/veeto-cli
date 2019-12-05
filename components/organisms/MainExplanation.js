@@ -22,43 +22,6 @@ const MainExplanation = (props) => {
             <ServicePhrase3>
                 오직 세 단계로 당신의 인간관계를 비옥하게.
             </ServicePhrase3>
-            {!props.tutorial && (
-                        <RepresentativeImg src={'/representative.png'} style={{marginBottom:'2.9rem'}}/>
-                    )}
-
-
-            {/* {!props.isOpen && (
-                <>
-            <Text size={1.5625} weight={300} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                    숫자를 선택해주세요.</Text>
-            <ActivitiesWrapper>
-                <ActivityWrapper>
-                    <Bowling></Bowling>
-                    <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                        볼링</Text>
-                </ActivityWrapper>
-                <ActivityWrapper>
-                    <BoardGame></BoardGame>
-                    <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                        보드게임</Text>
-                </ActivityWrapper>
-                <ActivityWrapper>
-                    <EscapeRoom></EscapeRoom>
-                    <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47} position={'relative'} right={0.85}>
-                        방탈출</Text>
-                </ActivityWrapper>
-            </ActivitiesWrapper>    
-            </>)}
-            {props.isOpen && (
-                <>
-            <selectedActivitiyWrapper>
-                <ActivityWrapper>
-                    <Bowling></Bowling>
-                    <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                        볼링</Text>
-                </ActivityWrapper>
-            </selectedActivitiyWrapper>    
-            </>)} */}
         </MainExplanationWrapper>
     );
   }

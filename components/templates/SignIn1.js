@@ -8,7 +8,6 @@ import { useRouter } from 'next/router'
 import { useMutation } from "../../lib/hooks"
 import axios from 'axios'
 
-
 const SignIn1 = (props) => {
     const [inputName, setInputName] = useState("");
     const [isGenderSelected, setGenderSelected] = useState("");
@@ -36,24 +35,47 @@ const SignIn1 = (props) => {
         reader.readAsDataURL(file);
       };
 
-
     const handleImgSubmit = (e) => {
-        const sImg = new Blob([inputImageSrc]);
-        e.preventDefault();
-        console.log(inputImageSrc);
-        let form_data = new FormData();
-        form_data.append('image', sImg, sImg.name);
+        const axios = require('axios');
+        const FormData = require('form-data');
+
+        const form_data = new FormData();
+        form_data.append('image', inputImageSrc, 'image');
+        console.log(form_data);
         let url = 'https://d2gv8trg60k042.cloudfront.net/accounts/auth/';
         axios.post(url, form_data, {
-          headers: {
-            'content-type': 'multipart/form-data'
-          }
+          headers: form_data.getHeaders(),
         })
             .then(res => {
               console.log(res.data);
             })
             .catch(err => console.log(err))
       };
+
+    // const handleImgSubmit = (e) => {
+    //     const sImg = inputImageSrc;
+    //     e.preventDefault();
+    //     console.log(inputImageSrc);
+    //     let form_data = new FormData();
+    //     form_data.append('image', sImg);
+    //     let url = 'https://d2gv8trg60k042.cloudfront.net/accounts/auth/';
+    //     // axios.post(url, form_data, {
+    //     //   headers: {
+    //     //     'content-type': 'multipart/form-data'
+    //     //   }
+    //     // })
+    //     //     .then(res => {
+    //     //       console.log(res.data);
+    //     //     })
+    //     //     .catch(err => console.log(err))
+
+    //     fetch(url, {
+    //         method: 'POST',
+    //         headers: {'Content-Type': 'multipart/form-data'},
+    //         body: form_data
+    //     }).then( response => response.json() ).then( data => console.log(data))
+    
+    //   };
 
 
       const imgFunc = e => {
@@ -148,14 +170,14 @@ const SignIn1 = (props) => {
                                         </Uploaded>
                                     </InputBox>
                                 </label>
-                                <input width={'100%'} type="file" id="studentCard_image" name="studentCard_image" onChange={imgFunc} style={{display:'none'}}></input>
+                                <input width={'100%'} type="file" id="studentCard_image" name="studentCard_image" onChange={handleUpload} style={{display:'none'}}></input>
 
                                 <input type="hidden" id="date" name="date" value={date}></input>
                                 <input type="hidden" id="time" name="time" value={time}></input>
                                 <input type="hidden" id="activity" name="activity" value={activity}></input>
                     </FormsWrapper>
                     <Link href="/done"><a>
-                        <Submit onClick={handleSubmit}>제출하기</Submit>
+                        <Submit onClick={handleImgSubmit}>제출하기</Submit>
                     </a></Link>
                 </SignWrapper>
                 </Wrapper>
