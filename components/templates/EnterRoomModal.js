@@ -18,21 +18,15 @@ const EnterRoomModal = (props) => {
         }
     }
 
-    if(props.date.toString().length===1){
-      var refinedDate = 0+props.date.toString();
-    }
-    else{
-      var refinedDate = props.date.toString();
-    }
     return (
       <React.Fragment>
           {props.isModalOpen && (
               <>
                          <ModalOverLay/>
                          <Modal>
-                         <EnterRoomByDate activity={props.activity} month={props.month} date={props.date} time={props.time}></EnterRoomByDate>
+                         <EnterRoomByDate fullDate={props.fullDate} updateFullDate={props.updateFullDate} activity={props.activity} time={props.time}></EnterRoomByDate>
                          
-                         <Link href={{ pathname: 'hi', query: { date:`${props.year}-${props.month}-${refinedDate}`, time:`${props.time}`, activity:`${props.activity}`}}}><a>
+                         <Link href={{ pathname: 'hi', query: { date:`${props.fullDate}`, time:`${props.time}`, activity:`${props.activity}`}}}><a>
                             <ApplyButt>참여 신청하기</ApplyButt>
                          </a></Link>
                          {/* <Icon>{icon()}</Icon>

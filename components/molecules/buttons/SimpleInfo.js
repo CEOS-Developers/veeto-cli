@@ -7,16 +7,26 @@ import Location from '../../atoms/icons/location'
 const SimpleInfo = (props) => {
     const router = useRouter();
     const { date } = router.query;
-    
-    const alterDate = props.fullDate;
-    console.log(alterDate);
+    const [dayIndex, setDayIndex] = useState(0);
 
+    if(date){props.updateFullDate(date);}
+
+    var day = 0;
     const dayList = ['일','월','화','수','목','금','토'];
-    // const [myFullDate, setMyFullDate] = useState(null);
     useEffect(() => {
-        // setMyFullDate( new window.Date(alterDate));
-        props.updateDay(props.fullDate.getDay());
-    },[])
+        day = new window.Date(props.fullDate).getDay();
+        setDayIndex(day);
+    })
+
+    let refinedDate = props.date;
+
+    if(props.date){
+        if(props.date.toString().length===1){
+            refinedDate = '0'+props.date.toString();
+        };
+    
+        console.log(refinedDate.length);
+    }
 
     const icon = () =>{
         if(props.activity==1){
@@ -41,25 +51,12 @@ const SimpleInfo = (props) => {
 
     return (
                 <SimpleInfoWrapper>
-                <Date style={{marginRight:'1rem'}}>{props.month}/{props.date}</Date>
-                {props.day && <Date style={{marginRight:'1.5rem'}}>{dayList[props.day]}</Date>}
-                <Date style={{marginRight:'1.5rem'}}>{dayList[props.realDay]}</Date>
+                {props.fullDate && <Date style={{marginRight:'1rem'}}>{date.slice(5,7)}/{date.slice(8,10)}</Date>}
+                {props.fullDate && <Date style={{marginRight:'1.5rem'}}>{dayList[dayIndex]}</Date>}
+                {props.month && <Date style={{marginRight:'1rem'}}>{props.month}/{refinedDate}</Date>}
+                {props.month && <Date style={{marginRight:'1.5rem'}}>{dayList[props.day]}</Date>}
                 {icon()}
                 <Time>{props.time}</Time>
-                    {/* <Line1>
-                        {icon()}
-                        <Time>{props.time}</Time>
-                        <RoomTitle>{props.room_name}</RoomTitle>
-                    </Line1>
-                    <Line2>
-                        <BoardGame style={{visibility:'hidden',marginRight:'1.5rem'}}></BoardGame>
-                        <Time style={{visibility:'hidden'}} >00:00</Time>
-                        <PlaceWrapper>
-                            <Location style={{marginRight:'0.42rem'}}></Location>
-                            <Place>{props.place}</Place>
-                        </PlaceWrapper>
-                        
-                    </Line2> */}
                 </SimpleInfoWrapper>
     );
   }

@@ -6,7 +6,7 @@ import EnterRoomModal from '../templates/EnterRoomModal';
 
 const RoomListByDate = (props) => {
     return (
-                    <SimpleInfo fullDate={props.fullDate} realDay={props.realDay} updateDay={props.updateDay} year={props.year} month={props.month} date={props.date} day={props.day} activity={props.activity} time={props.time}></SimpleInfo>
+                    <SimpleInfo fullDate={props.fullDate} updateFullDate={props.updateFullDate} year={props.year} month={props.month} date={props.date} day={props.day} activity={props.activity} time={props.time}></SimpleInfo>
     );
   }
 
