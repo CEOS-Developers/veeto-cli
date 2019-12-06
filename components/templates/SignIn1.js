@@ -35,15 +35,25 @@ const SignIn1 = (props) => {
         reader.readAsDataURL(file);
       };
 
-    const handleImgSubmit = (e) => {
+    const handleSubmit = (e) => {
         // e.preventDefault();
         const axios = require('axios');
         const FormData = require('form-data');
 
         const form_data = new FormData();
-        form_data.append('image', inputImageSrc);
+        form_data.append('user_name', inputName);
+        form_data.append('gender', isGenderSelected);
+        form_data.append('phone_num', inputPhoneNum);
+        form_data.append('university', isUnivSelected);
+        form_data.append('user_nickname', inputNickName);
+        form_data.append('age', Number(inputAge));
+        form_data.append('desired_gender_ratio', isPreferGenderSelected);
+        form_data.append('studentCard_image', inputImageSrc);
+        form_data.append('date', date);
+        form_data.append('time', time);
+        form_data.append('activity', Number(activity));
         console.log(form_data);
-        let url = 'https://d2gv8trg60k042.cloudfront.net/accounts/auth/';
+        let url = 'https://d2gv8trg60k042.cloudfront.net/accounts/userForm/';
         axios.post(url, form_data)
             .then(res => {
               console.log(res.data);
@@ -51,54 +61,6 @@ const SignIn1 = (props) => {
             .catch(err => console.log(err))
       };
 
-    // const handleImgSubmit = (e) => {
-    //     const sImg = inputImageSrc;
-    //     e.preventDefault();
-    //     console.log(inputImageSrc);
-    //     let form_data = new FormData();
-    //     form_data.append('image', sImg);
-    //     let url = 'https://d2gv8trg60k042.cloudfront.net/accounts/auth/';
-    //     // axios.post(url, form_data, {
-    //     //   headers: {
-    //     //     'content-type': 'multipart/form-data'
-    //     //   }
-    //     // })
-    //     //     .then(res => {
-    //     //       console.log(res.data);
-    //     //     })
-    //     //     .catch(err => console.log(err))
-
-    //     fetch(url, {
-    //         method: 'POST',
-    //         headers: {'Content-Type': 'multipart/form-data'},
-    //         body: form_data
-    //     }).then( response => response.json() ).then( data => console.log(data))
-    
-    //   };
-
-
-      const imgFunc = e => {
-        handleUpload(e);
-       // handleImgSubmit(e);
-    }
-
-
-    const handleSubmit = () => {
-        const result = useMutation('https://d2gv8trg60k042.cloudfront.net/accounts/userForm/',{
-            user_name : inputName,
-            gender : isGenderSelected,
-            phone_num : inputPhoneNum,
-            university : isUnivSelected,
-            user_nickname : inputNickName,
-            age : Number(inputAge),
-            desired_gender_ratio : isPreferGenderSelected,
-            // studentCard_image : inputImageSrc,
-            date : date,
-            time : time,
-            activity : Number(activity)
-        });
-        console.log("success!")
-    }
 
     return (
         <>
@@ -176,7 +138,7 @@ const SignIn1 = (props) => {
                                 <input type="hidden" id="activity" name="activity" value={activity}></input>
                     </FormsWrapper>
                     <Link href="/done"><a>
-                        <Submit onClick={handleImgSubmit}>제출하기</Submit>
+                        <Submit onClick={handleSubmit}>제출하기</Submit>
                     </a></Link>
                 </SignWrapper>
                 </Wrapper>
