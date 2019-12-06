@@ -17,8 +17,8 @@ const gotoRoomByDate = () => {
         var refinedDate = nowDate.toString();
     }
 
-    const date=`${nowYear}-${nowMonth}-${refinedDate}`;
-
+    // const date=`${nowYear}-${nowMonth}-${refinedDate}`;
+    const date='2019-12-21';
     return(
         <Link href={{ pathname: 'roomsByDate', query: { date: `${date}` }}}>
             <a style={{textDecoration:'none'}}>
