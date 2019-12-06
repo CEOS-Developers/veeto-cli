@@ -39,7 +39,7 @@ const Component = (props) => {
         var refinedDay = props.value.toString();
     }
 
-    if((props.value-1)%divisor+1 >= nowDate || (props.value-1)%divisor+1 < (nowDate+14)%divisor) {
+    if(props.value===21 || props.value===22) {
         return(
             <Link href={{ pathname: 'roomsByDate', query: { date: `${props.year}-${props.month}-${refinedDay}` }}}>
             <a style={{textDecoration:'none'}}>
@@ -53,6 +53,22 @@ const Component = (props) => {
             <Day sunday={props.sunday} value={props.value}></Day>
         );
     }
+
+
+    // if((props.value-1)%divisor+1 >= nowDate || (props.value-1)%divisor+1 < (nowDate+14)%divisor) {
+    //     return(
+    //         <Link href={{ pathname: 'roomsByDate', query: { date: `${props.year}-${props.month}-${refinedDay}` }}}>
+    //         <a style={{textDecoration:'none'}}>
+    //             <Day selected={select} sunday={props.sunday} value={props.value}></Day>
+    //         </a>
+    //         </Link>
+    //     );
+    // }
+    // else{
+    //     return(
+    //         <Day sunday={props.sunday} value={props.value}></Day>
+    //     );
+    // }
 
   }
 

@@ -15,14 +15,19 @@ else if(nowMonth===2){
 }
 
 const DayButton = (props) => {
-    let dateColor = '#afafaf';
+    let dateColor = '#d9d9d9';
     let today = false;
-    if(props.value === nowDate) {
-        dateColor = '#3f6459';
-        today = true;
+    // if(props.value === nowDate) {
+    //     dateColor = '#3f6459';
+    //     today = true;
+    // }
+    // else if(props.sunday) dateColor = '#b46b16';
+    // else if((props.value-1)%divisor+1 >= nowDate || (props.value-1)%divisor+1 < (nowDate+14)%divisor) dateColor ='#2e9267';
+
+    if(props.value === 21 || props.value === 22) {
+        dateColor = '#2e9267';
     }
-    else if(props.sunday) dateColor = '#b46b16';
-    else if((props.value-1)%divisor+1 >= nowDate || (props.value-1)%divisor+1 < (nowDate+14)%divisor) dateColor ='#2e9267';
+    if(props.value===nowDate) today = true;
 
     return (
                 <Wrapper>

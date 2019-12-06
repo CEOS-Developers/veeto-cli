@@ -82,7 +82,7 @@ const getDateLines = () => {
                     <DayIndicator>토</DayIndicator>
                 </DaysRow>
                 <DaysRow>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-nowDay)%divisor+1}></Day>
+                    <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-nowDay)%divisor+1}></Day>
                     <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-1))%divisor+1}></Day>
                     <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-2))%divisor+1}></Day>
                     <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-3))%divisor+1}></Day>
