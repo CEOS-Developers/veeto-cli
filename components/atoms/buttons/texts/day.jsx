@@ -85,7 +85,7 @@ const Label = styled.div`
     line-height: 2.6;
     letter-spacing: normal;
     text-align: center;
-    color: #3f6459;
+    color: #909090;
 `
 
 export default DayButton

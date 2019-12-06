@@ -7,14 +7,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useMutation } from "../../lib/hooks"
 import axios from 'axios'
+import RewriteModal from '../templates/RewriteModal';
 
 const SignIn1 = (props) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [inputName, setInputName] = useState("");
     const [isGenderSelected, setGenderSelected] = useState("");
     const [inputPhoneNum, setInputPhoneNum] = useState("");
     const [isUnivSelected, setUnivSelected] = useState(0);
     const [inputNickName, setInputNickName] = useState("");
-    const [inputAge, setInputAge] = useState();
+    const [inputAge, setInputAge] = useState("");
     const [isPreferGenderSelected, setPreferGenderSelected] = useState(0);
     const [inputImageSrc, setInputImageSrc] = useState("");
     const [inputImageStr, setInputImageStr] = useState("");
@@ -23,6 +25,10 @@ const SignIn1 = (props) => {
     const { date } = router.query;
     const { time } = router.query;
     const { activity } = router.query;
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    }
 
     const handleUpload = e => {
         const file = e.target.files[0];
@@ -34,6 +40,16 @@ const SignIn1 = (props) => {
         };
         reader.readAsDataURL(file);
       };
+
+    const handleCheckNull = (e) => {
+        if(inputName===""||isGenderSelected===""||inputPhoneNum===""||isUnivSelected===0||inputNickName===""||inputAge===""||isPreferGenderSelected===0||inputImageSrc===""){
+            e.preventDefault();
+            setIsModalOpen(true);
+        }
+        else{
+            handleSubmit();
+        }
+    }
 
     const handleSubmit = (e) => {
         // e.preventDefault();
@@ -106,7 +122,10 @@ const SignIn1 = (props) => {
                                         </FormWrapper>
                                 </RowWrapper>
 
+                                <TitleWrapper>
                                 <FormTitle>희망 성비</FormTitle>
+                                <RatioAlert>최대한 희망 성비를 맞춰 방을 배정해드리겠습니다.</RatioAlert>
+                                </TitleWrapper>
                                 <input type="hidden" id="desired_gender_ratio" name="desired_gender_ratio" value={isPreferGenderSelected}></input>
                                 <RowWrapper style={{marginBottom:'1.6rem'}}>
                                     <Same selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(1)}>동성만</Same>
@@ -138,8 +157,9 @@ const SignIn1 = (props) => {
                                 <input type="hidden" id="activity" name="activity" value={activity}></input>
                     </FormsWrapper>
                     <Link href="/done"><a>
-                        <Submit onClick={handleSubmit}>제출하기</Submit>
+                        <Submit onClick={handleCheckNull}>제출하기</Submit>
                     </a></Link>
+                    <RewriteModal isModalOpen={isModalOpen} onClick={closeModal}></RewriteModal>
                 </SignWrapper>
                 </Wrapper>
                 </>
@@ -715,5 +735,26 @@ const Uploaded = styled.div`
     align-items:center;
     width:100%;
     height:fit-content;
+`
+
+const TitleWrapper = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+`
+
+const RatioAlert = styled.div`
+    width:  fit-content;
+    height: fit-content;
+    font-family: NotoSansCJKkr;
+    font-size: 0.9rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.91;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2e9267;
+    margin-left:1rem;
 `
 export default SignIn1
