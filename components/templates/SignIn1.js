@@ -3,14 +3,18 @@ import styled, {css} from 'styled-components';
 import BackToLogin from '../molecules/buttons/BackToLogin';
 import PageHeader from '../organisms/PageHeader'
 import Camera from '../atoms/buttons/icons/camera';
+import Dot from '../atoms/icons/Dot';
+import Check from '../atoms/icons/check';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useMutation } from "../../lib/hooks"
 import axios from 'axios'
 import RewriteModal from '../templates/RewriteModal';
+import AgreePModal from '../templates/AgreePModal';
 
 const SignIn1 = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isPModalOpen, setIsPModalOpen] = useState(false);
     const [inputName, setInputName] = useState("");
     const [isGenderSelected, setGenderSelected] = useState("");
     const [inputPhoneNum, setInputPhoneNum] = useState("");
@@ -20,6 +24,12 @@ const SignIn1 = (props) => {
     const [isPreferGenderSelected, setPreferGenderSelected] = useState(0);
     const [inputImageSrc, setInputImageSrc] = useState("");
     const [inputImageStr, setInputImageStr] = useState("");
+    const [pInfoAgree, setPInfoAgree] = useState(0);
+    const [pAgreeColor, setPAgreeColor] = useState("");
+    const [pDisagreeColor, setPDisagreeColor] = useState("");
+    const [vlogAgree, setVlogAgree] = useState(0);
+    const [vAgreeColor, setVAgreeColor] = useState("");
+    const [vDisagreeColor, setVDisagreeColor] = useState("");
 
     const router = useRouter();
     const { date } = router.query;
@@ -28,6 +38,31 @@ const SignIn1 = (props) => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+    } 
+
+    const closePModal = () => {
+        setIsPModalOpen(false);
+    } 
+
+    const pAgree = () => {
+        setPInfoAgree(1);
+        setPAgreeColor("#3f6459");
+        setPDisagreeColor("");
+    }
+    const pDisagree = () => {
+        setPInfoAgree(0);
+        setPDisagreeColor("#3f6459");
+        setPAgreeColor("");
+    }
+    const vAgree = () => {
+        setVlogAgree(1);
+        setVAgreeColor("#3f6459");
+        setVDisagreeColor("");
+    }
+    const vDisagree = () => {
+        setVlogAgree(0);
+        setVDisagreeColor("#3f6459");
+        setVAgreeColor("");
     }
 
     const handleUpload = e => {
@@ -45,6 +80,10 @@ const SignIn1 = (props) => {
         if(inputName===""||isGenderSelected===""||inputPhoneNum===""||isUnivSelected===0||inputNickName===""||inputAge===""||isPreferGenderSelected===0||inputImageSrc===""){
             e.preventDefault();
             setIsModalOpen(true);
+        }
+        else if(pInfoAgree===0){
+            e.preventDefault();
+            setIsPModalOpen(true);
         }
         else{
             handleSubmit();
@@ -68,6 +107,7 @@ const SignIn1 = (props) => {
         form_data.append('date', date);
         form_data.append('time', time);
         form_data.append('activity', Number(activity));
+        form_data.append('is_photoOK', vlogAgree);
         console.log(form_data);
         let url = 'https://d2gv8trg60k042.cloudfront.net/accounts/userForm/';
         axios.post(url, form_data)
@@ -122,18 +162,6 @@ const SignIn1 = (props) => {
                                         </FormWrapper>
                                 </RowWrapper>
 
-                                <TitleWrapper>
-                                <FormTitle>희망 성비</FormTitle>
-                                <RatioAlert>최대한 희망 성비를 맞춰 방을 배정해드리겠습니다.</RatioAlert>
-                                </TitleWrapper>
-                                <input type="hidden" id="desired_gender_ratio" name="desired_gender_ratio" value={isPreferGenderSelected}></input>
-                                <RowWrapper style={{marginBottom:'1.6rem'}}>
-                                    <Same selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(1)}>동성만</Same>
-                                    <OneToOne selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(2)}>1:1</OneToOne>
-                                    <DontCare selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(3)}>무관</DontCare>
-                                    <Blank></Blank>
-                                </RowWrapper>
-
                                 <FormTitle>학교 인증하기</FormTitle>
                                 <label for="studentCard_image">
                                     <InputBox>
@@ -155,11 +183,82 @@ const SignIn1 = (props) => {
                                 <input type="hidden" id="date" name="date" value={date}></input>
                                 <input type="hidden" id="time" name="time" value={time}></input>
                                 <input type="hidden" id="activity" name="activity" value={activity}></input>
+
+                                <TitleWrapper>
+                                <FormTitle>희망 성비</FormTitle>
+                                <RatioAlert>최대한 희망 성비를 맞춰 방을 배정해드리겠습니다.</RatioAlert>
+                                </TitleWrapper>
+                                <input type="hidden" id="desired_gender_ratio" name="desired_gender_ratio" value={isPreferGenderSelected}></input>
+                                <RowWrapper style={{marginBottom:'3.4rem'}}>
+                                    <Same selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(1)}>동성만</Same>
+                                    <OneToOne selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(2)}>1:1</OneToOne>
+                                    <DontCare selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(3)}>무관</DontCare>
+                                    <Blank></Blank>
+                                </RowWrapper>
+
+                                <AdditionalInfoWrapper>
+                                    <AdditionalInfoBox>
+                                       <AdditionalInfoRow>
+                                            <Dot color={"#2e9267"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
+                                            <InfoHead>약속 장소는 신촌 지역 부근입니다.</InfoHead>    
+                                       </AdditionalInfoRow> 
+                                    </AdditionalInfoBox>
+                                    <AdditionalInfoBox style={{marginBottom:'1.6rem'}}>
+                                       <AdditionalInfoRow>
+                                            <Dot color={"#2e9267"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
+                                            <a href="http://nextmatch.kr/privacy/amanda/index.html">
+                                                <InfoHead>개인정보 처리 방침 보기</InfoHead>
+                                            </a>    
+                                       </AdditionalInfoRow>
+                                       <AdditionalInfoRow> 
+                                            <Dot color={"#ffffff"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
+                                            <Explanation>수집한 개인정보는 방 개설 외의 다른 용도로 사용되지 않습니다.</Explanation>
+                                       </AdditionalInfoRow> 
+                                       <AdditionalInfoRow> 
+                                            <Dot color={"#ffffff"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
+                                            <BoxLabel>동의</BoxLabel>
+                                            <Box onClick={pAgree}>
+                                                    <Check color={pAgreeColor} style={{position:'relative',bottom:'0.6rem'}}></Check>
+                                            </Box>
+                                       </AdditionalInfoRow>
+                                       <AdditionalInfoRow> 
+                                            <Dot color={"#ffffff"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
+                                            <BoxLabel style={{opacity:'0.59'}}>비동의</BoxLabel>
+                                            <Explanation style={{marginRight:'0.6rem'}}>비동의 시 서비스 이용이 어렵습니다.</Explanation>
+                                            <Box onClick={pDisagree}><Check color={pDisagreeColor} style={{position:'relative',bottom:'0.6rem'}}></Check></Box>
+                                       </AdditionalInfoRow> 
+                                    </AdditionalInfoBox>
+                                    <AdditionalInfoBox style={{marginBottom:'2.9rem'}}>
+                                       <AdditionalInfoRow>
+                                            <Dot color={"#2e9267"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
+                                            <InfoHead>활동 촬영 동의서</InfoHead>    
+                                       </AdditionalInfoRow>
+                                       <AdditionalInfoRow> 
+                                            <Dot color={"#ffffff"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
+                                            <Explanation>브이로그 형식으로 즐거운 추억을 만들어 드립니다.</Explanation>
+                                       </AdditionalInfoRow> 
+                                       <AdditionalInfoRow> 
+                                            <Dot color={"#ffffff"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
+                                            <BoxLabel>동의</BoxLabel>
+                                            <Box onClick={vAgree}>
+                                                    <Check color={vAgreeColor} style={{position:'relative',bottom:'0.6rem'}}></Check>
+                                            </Box>
+                                       </AdditionalInfoRow>
+                                       <AdditionalInfoRow> 
+                                            <Dot color={"#ffffff"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
+                                            <BoxLabel style={{opacity:'0.59'}}>비동의</BoxLabel>
+                                            <Box onClick={vDisagree}><Check color={vDisagreeColor} style={{position:'relative',bottom:'0.6rem'}}></Check></Box>
+                                       </AdditionalInfoRow> 
+                                    </AdditionalInfoBox>
+                                </AdditionalInfoWrapper>
                     </FormsWrapper>
+                    
+
                     <Link href="/done"><a>
                         <Submit onClick={handleCheckNull}>제출하기</Submit>
                     </a></Link>
                     <RewriteModal isModalOpen={isModalOpen} onClick={closeModal}></RewriteModal>
+                    <AgreePModal isPModalOpen={isPModalOpen} onClick={closePModal}></AgreePModal>
                 </SignWrapper>
                 </Wrapper>
                 </>
@@ -682,6 +781,7 @@ const InputBox = styled.div`
     line-height: 1.47;
     letter-spacing: normal;
     color: #2e9267;
+    margin-bottom:1.5rem;
 
 `
 const BoxTitle = styled.div`
@@ -741,13 +841,15 @@ const TitleWrapper = styled.div`
     display:flex;
     flex-direction:row;
     align-items:center;
+    width:100%;
+    height:fit-content;
 `
 
 const RatioAlert = styled.div`
     width:  fit-content;
     height: fit-content;
     font-family: NotoSansCJKkr;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -756,5 +858,77 @@ const RatioAlert = styled.div`
     text-align: left;
     color: #2e9267;
     margin-left:1rem;
+    margin-bottom:0.3rem;
+`
+
+const AdditionalInfoWrapper = styled.div`
+    width:100%;
+    height:fit-content;
+    display:flex;
+    flex-direction:column;
+`
+const AdditionalInfoBox = styled.div`
+    width:100%;
+    height:fit-content;
+    display:flex;
+    flex-direction:column;
+`
+const AdditionalInfoRow = styled.div`
+    width:100%;
+    height:fit-content;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+`
+
+const InfoHead = styled.div`
+    width:fit-content;
+    height:fit-content;
+    font-family: NotoSansCJKkr;
+    font-size: 1.3rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.62;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2e9267;
+    text-decoration:underline;
+`
+
+const Explanation = styled.div`
+    width:fit-content;
+    height:fit-content
+    font-family: NotoSansCJKkr;
+    font-size: 1rem;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.91;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2e9267;
+`
+
+const BoxLabel = styled.div`
+    width:fit-content;
+    height:fit-content;
+    font-family: NotoSansCJKkr;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.62;
+    letter-spacing: normal;
+    text-align: left;
+    color: #2e9267;
+    margin-right:0.6rem;
+`
+
+const Box = styled.div`
+    width: 1.6rem;
+    height: 1.6rem;
+    border: solid 0.2rem #49a880;
+    overflow : visible;
 `
 export default SignIn1
