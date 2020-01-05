@@ -25,7 +25,7 @@ const RoomsByAct = () => {
         name="viewport"
         content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
       />
-        <title>Home</title>
+         <title>Veeto - 비토</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Wrapper>
@@ -39,14 +39,5 @@ const RoomsByAct = () => {
 RoomsByAct.getInitialProps = () => {
   return {};
 }
-
-const RepresentativeImg = styled.img`
-    width: 93.3%;
-    height: 16.1rem;
-    object-fit: contain;
-    border-radius: 0.9rem;
-    margin-top:3.1rem;
-    margin-bottom:3.1rem;
-`
 
 export default RoomsByAct

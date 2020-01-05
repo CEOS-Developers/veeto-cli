@@ -33,10 +33,10 @@ const ActivitiesWrapper = styled.div`
     justify-content:space-between;
     align-items:center;
 
-    margin-top:1.125rem;
     width:fit-content;
     height:fit-content;
     overflow:auto;
+    margin-bottom:1.5rem;
 `
 
 const BowlingWrapper = styled.div`

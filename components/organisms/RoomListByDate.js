@@ -19,28 +19,28 @@ const RoomListByDate = (props) => {
 
     const router = useRouter();
     const { date } = router.query;
-    const [fullDate, setFullDate] = useState(date);
+    const [queryDate, setQueryDate] = useState(date);
 
-    const updateFullDate = (n) => {
-        setFullDate(n);
+    const updateQueryDate = (n) => {
+        setQueryDate(n);
     }
 
     const getScheduleLines = () => {
         // return data.map((value, index) => {
             return(
                 <>  
-                    <RoomWrapper onClick={closeModal1}><EnterRoomByDate fullDate={fullDate} updateFullDate={updateFullDate} activity={1} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal1} isModalOpen={isModal1Open} fullDate={fullDate} updateFullDate={updateFullDate} activity={1} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal2}><EnterRoomByDate fullDate={fullDate} updateFullDate={updateFullDate} activity={2} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal2} isModalOpen={isModal2Open} fullDate={fullDate} updateFullDate={updateFullDate} activity={2} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal3}><EnterRoomByDate fullDate={fullDate} updateFullDate={updateFullDate} activity={3} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal3} isModalOpen={isModal3Open} fullDate={fullDate} updateFullDate={updateFullDate} activity={3} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal4}><EnterRoomByDate fullDate={fullDate} updateFullDate={updateFullDate} activity={1} time={'19:00'}></EnterRoomByDate></RoomWrapper>
+                    <RoomWrapper onClick={closeModal1}><EnterRoomByDate queryDate={queryDate} updateQueryDate={updateQueryDate} activity={1} time={'17:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal1} isModalOpen={isModal1Open} queryDate={queryDate} updateQueryDate={updateQueryDate} activity={1} time={'17:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal2}><EnterRoomByDate queryDate={queryDate} updateQueryDate={updateQueryDate} activity={2} time={'17:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal2} isModalOpen={isModal2Open} queryDate={queryDate} updateQueryDate={updateQueryDate} activity={2} time={'17:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal3}><EnterRoomByDate queryDate={queryDate} updateQueryDate={updateQueryDate} activity={3} time={'17:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal3} isModalOpen={isModal3Open} queryDate={queryDate} updateQueryDate={updateQueryDate} activity={3} time={'17:00'}></EnterRoomModal>
+                    {/* <RoomWrapper onClick={closeModal4}><EnterRoomByDate fullDate={fullDate} updateFullDate={updateFullDate} activity={1} time={'19:00'}></EnterRoomByDate></RoomWrapper>
                     <EnterRoomModal onClick={closeModal4} isModalOpen={isModal4Open} fullDate={fullDate} updateFullDate={updateFullDate} activity={1} time={'19:00'}></EnterRoomModal>
                     <RoomWrapper onClick={closeModal5}><EnterRoomByDate fullDate={fullDate} updateFullDate={updateFullDate} activity={2} time={'19:00'}></EnterRoomByDate></RoomWrapper>
                     <EnterRoomModal onClick={closeModal5} isModalOpen={isModal5Open} fullDate={fullDate} updateFullDate={updateFullDate} activity={2} time={'19:00'}></EnterRoomModal>
                     <RoomWrapper onClick={closeModal6}><EnterRoomByDate fullDate={fullDate} updateFullDate={updateFullDate} activity={3} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal6} isModalOpen={isModal6Open} fullDate={fullDate} updateFullDate={updateFullDate} activity={3} time={'19:00'}></EnterRoomModal>
+                    <EnterRoomModal onClick={closeModal6} isModalOpen={isModal6Open} fullDate={fullDate} updateFullDate={updateFullDate} activity={3} time={'19:00'}></EnterRoomModal> */}
                 </>
             );
         // })

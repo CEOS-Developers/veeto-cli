@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 import {getDateLines} from '../organisms/MainChooseDate';
 import {getMonth} from '../organisms/MainChooseDate';
 
-const MainExplanation = (props) => {
+const MainExplanation = () => {
     return (
         <Wrapper>
             <MainChooseActWrapper>
@@ -21,21 +21,6 @@ const MainExplanation = (props) => {
         </Wrapper>
     );
   }
-
-  const Month = styled.div`
-    width: fit-content;
-    height: 2.9rem;
-    font-family: NotoSansCJKkr;
-    font-size: 1.8rem;
-    font-weight: 500;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 2;
-    letter-spacing: normal;
-    text-align: center;
-    color: #2e9267;
-    margin-bottom:1.5rem;
-`
 
 const ServicePhrase2 = styled.div`
     width: fit-content;

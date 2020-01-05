@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link'
 
-import Drawer from "../molecules/buttons/Drawer";
 import Home from "../molecules/buttons/Home";
-import Shop from "../molecules/buttons/Shop";
 
 const Wrapper = styled.div`
     position:fixed;
@@ -16,6 +14,7 @@ const Wrapper = styled.div`
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     width:100%;
     height:4.5rem;
+    z-index:10;
 `
 
 const HeaderWrapper = styled.div`
@@ -23,6 +22,7 @@ const HeaderWrapper = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:center;
+    background-color:#ffffff;
 
 `
 

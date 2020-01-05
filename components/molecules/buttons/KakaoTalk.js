@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const KakaoTalk = () => {
     return(
-        <KakaoWrapper target="_blank" href="https://pf.kakao.com/_tTcQT" style={{textDecoration:'none'}}>
+        <KakaoWrapper target="_blank/" href="https://pf.kakao.com/_tTcQT" style={{textDecoration:'none'}}>
             <KakaoLabel>카톡 문의하기</KakaoLabel>
             <KakaoImg src={'/kakao.png'}/>
         </KakaoWrapper>

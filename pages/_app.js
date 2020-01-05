@@ -1,6 +1,8 @@
 import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
+import Router from "next/router";
+import withGA from "next-ga";
 
 import styled, { createGlobalStyle } from 'styled-components';
 
@@ -64,14 +66,14 @@ html,
           }
 `;
 
-class PickkApp extends App {
+class Veeto extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
         <>
         <GlobalStyle />
           <Head>
-            <title>핔 - 당신의 패션 선택지</title>
+            <title>Veeto - 비토</title>
           </Head>
           <BestWrapper>
             <Grey />
@@ -87,7 +89,7 @@ class PickkApp extends App {
 
 const Wrapper = styled.div`
   width: 100%;
-  max-width: 36rem;
+  max-width: 37.5rem;
   min-height: 100%;
   background-color: white;
   position:relatvie;
@@ -105,4 +107,4 @@ const BestWrapper = styled.div`
   min-height: 100%;
 `;
 
-export default PickkApp;
+export default withGA("UA-154485862-1", Router)(Veeto);

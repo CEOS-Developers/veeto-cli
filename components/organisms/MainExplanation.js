@@ -1,13 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Button } from 'reactstrap';
-import Link from 'next/link'
-import Text from '../atoms/Text';
-
-import TutorialSlider from './Tutorial';
 import Logo from "../atoms/icons/logo";
-import Carousel from 'react-bootstrap/Carousel';
-import { textAlign, display } from '@material-ui/system';
 
 const MainExplanation = (props) => {
     return (
@@ -15,7 +8,7 @@ const MainExplanation = (props) => {
             <ServicePhrase1>
                 신촌에서 인생 친구를 찾다,
             </ServicePhrase1>
-            <Logo style={{width:'41%', height:'4.18rem', marginBottom:'1.52rem'}}></Logo>
+            <Logo style={{width:'41.6%', height:'4.4rem', marginBottom:'1.4rem'}}></Logo>
             <ServicePhrase2>
                 방 선택, 약속 잡기, 만남.
             </ServicePhrase2>
@@ -38,14 +31,14 @@ const MainExplanation = (props) => {
     letter-spacing: normal;
     text-align: center;
     color: #2e9267;
-    margin-bottom:1.5rem;
+    margin-bottom:1.4rem;
 `
 
 const ServicePhrase2 = styled.div`
-    margin-top:0.1rem;
     font-size: 2.2rem;
     font-weight: bold;
     color: #2e9267;
+    margin-bottom:0.2rem;
 `
 const ServicePhrase3 = styled.div`
     width: fit-content;
@@ -59,16 +52,7 @@ const ServicePhrase3 = styled.div`
     letter-spacing: normal;
     text-align: center;
     color: #439f77;
-    margin-bottom : 4.1rem;
 `
-
-const RepresentativeImg = styled.img`
-    width: 93.3%;
-    height: 16.1rem;
-    object-fit: contain;
-    border-radius: 0.9rem;
-`
-
 const MainExplanationWrapper = styled.div`
     display:flex;
     flex-direction:column;
@@ -77,7 +61,8 @@ const MainExplanationWrapper = styled.div`
     width:100%;
     height:fit-content;
     overflow:auto;
-    margin-top:${props => props.tutorial ? '5.4rem' : '9.4rem'};
+    margin-top:${props => props.tutorial ? '5.4rem' : '7.5rem'};
+    margin-bottom:${props => props.tutorial ? '4.1rem' : '3.1rem'};
 `
   
 export default MainExplanation

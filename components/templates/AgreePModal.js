@@ -11,7 +11,7 @@ const RewriteModal = (props) => {
                          <ModalOverLay/>
                          <Modal>
                         <Alert>개인정보 수집에 동의해주세요.</Alert>
-                        <CloseButt onClick={props.onClick}>확인</CloseButt>
+                        <CloseButt onClick={props.onClick}><div>확인</div></CloseButt>
                          </Modal>
               </>
     )}
@@ -63,6 +63,10 @@ const RewriteModal = (props) => {
   `
 
   const CloseButt = styled.div`
+    display:flex;
+    flex-direction:column;
+    justify-content:center:
+    align-items:center;
     margin-bottom:1.4rem;
 
     width: 23.9rem;
@@ -76,7 +80,6 @@ const RewriteModal = (props) => {
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.2;
     letter-spacing: normal;
     text-align: center;
     color: #2e9267;

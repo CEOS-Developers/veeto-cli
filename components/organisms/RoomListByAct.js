@@ -1,9 +1,8 @@
 import React, { useState, Component } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import {useDataApi} from '../../lib/hooks'
+import {useDataApi} from '../../lib/hooks' //hook 나중에 쓰면 참고
 import EnterRoomModal from '../templates/EnterRoomModal';
 import EnterRoomByDate from '../organisms/EnterRoomByDate';
 import GotoRoomByDate from '../molecules/buttons/gotoRoomByDate';
@@ -13,46 +12,28 @@ const RoomListByDate = (props) => {
     const [isModal2Open, setModal2Open] = useState(false); const closeModal2 = () => { setModal2Open(!isModal2Open); }
     const [isModal3Open, setModal3Open] = useState(false); const closeModal3 = () => { setModal3Open(!isModal3Open); }
     const [isModal4Open, setModal4Open] = useState(false); const closeModal4 = () => { setModal4Open(!isModal4Open); }
-    const [isModal5Open, setModal5Open] = useState(false); const closeModal5 = () => { setModal5Open(!isModal5Open); }
-    const [isModal6Open, setModal6Open] = useState(false); const closeModal6 = () => { setModal6Open(!isModal6Open); }
     
     const router = useRouter();
     const { activity } = router.query;
 
     const now = new Date();
-    let nowDate = now.getDate();
-    const nowYear = now.getFullYear();
-    const nowMonth = now.getMonth()+1;
     const nowDay = now.getDay();
 
     const getScheduleLines = () => {
-        // return data.map((value, index) => {
             return(
                 <>
-                    {/* <RoomWrapper onClick={closeModal1}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate} day={nowDay%7} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal1} isModalOpen={isModal1Open} year={nowYear} month={nowMonth} date={nowDate} day={nowDay%7} activity={activity} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal2}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+1} day={(nowDay+1)%7} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal2} isModalOpen={isModal2Open} year={nowYear} month={nowMonth} date={nowDate+1} day={(nowDay+1)%7} activity={activity} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal3}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+2} day={(nowDay+2)%7} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal3} isModalOpen={isModal3Open} year={nowYear} month={nowMonth} date={nowDate+2} day={(nowDay+2)%7} activity={activity} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal4}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+3} day={(nowDay+3)%7} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal4} isModalOpen={isModal4Open} year={nowYear} month={nowMonth} date={nowDate+3} day={(nowDay+3)%7} activity={activity} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal5}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+4} day={(nowDay+4)%7} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal5} isModalOpen={isModal5Open} year={nowYear} month={nowMonth} date={nowDate+4} day={(nowDay+4)%7} activity={activity} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal6}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={nowDate+5} day={(nowDay+5)%7} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal6} isModalOpen={isModal6Open} year={nowYear} month={nowMonth} date={nowDate+5} activity={activity} day={(nowDay+5)%7} time={'19:00'}></EnterRoomModal> */}
-
-                    <RoomWrapper onClick={closeModal1}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={21} day={6} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal1} isModalOpen={isModal1Open} year={nowYear} month={nowMonth} date={21} day={6} activity={activity} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal2}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={21} day={6} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal2} isModalOpen={isModal2Open} year={nowYear} month={nowMonth} date={21} day={6} activity={activity} time={'19:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal3}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={22} day={0} time={'14:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal3} isModalOpen={isModal3Open} year={nowYear} month={nowMonth} date={22} day={0} activity={activity} time={'14:00'}></EnterRoomModal>
-                    <RoomWrapper onClick={closeModal4}><EnterRoomByDate activity={activity} year={nowYear} month={nowMonth} date={22} day={0} time={'19:00'}></EnterRoomByDate></RoomWrapper>
-                    <EnterRoomModal onClick={closeModal4} isModalOpen={isModal4Open} year={nowYear} month={nowMonth} date={22} day={0} activity={activity} time={'19:00'}></EnterRoomModal>
+                {(nowDay!=4 && nowDay!=5 && nowDay!=6) && <>
+                    <RoomWrapper onClick={closeModal1}><EnterRoomByDate activity={activity} fullDate={new Date(now.valueOf()+1000*3600*24*(6-nowDay))} time={'17:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal1} isModalOpen={isModal1Open} fullDate={new Date(now.valueOf()+1000*3600*24*(6-nowDay))} activity={activity} time={'17:00'}></EnterRoomModal> </>}
+                {(nowDay!=5 && nowDay!=6) && <>
+                    <RoomWrapper onClick={closeModal2}><EnterRoomByDate activity={activity} fullDate={new Date(now.valueOf()+1000*3600*24*(6-nowDay+1))} time={'17:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal2} isModalOpen={isModal2Open} fullDate={new Date(now.valueOf()+1000*3600*24*(6-nowDay+1))} activity={activity} time={'17:00'}></EnterRoomModal> </>}
+                    <RoomWrapper onClick={closeModal3}><EnterRoomByDate activity={activity} fullDate={new Date(now.valueOf()+1000*3600*24*(6-nowDay+7))} time={'17:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal3} isModalOpen={isModal3Open} fullDate={new Date(now.valueOf()+1000*3600*24*(6-nowDay+7))} activity={activity} time={'17:00'}></EnterRoomModal>
+                    <RoomWrapper onClick={closeModal4}><EnterRoomByDate activity={activity} fullDate={new Date(now.valueOf()+1000*3600*24*(6-nowDay+7+1))} time={'17:00'}></EnterRoomByDate></RoomWrapper>
+                    <EnterRoomModal onClick={closeModal4} isModalOpen={isModal4Open} fullDate={new Date(now.valueOf()+1000*3600*24*(6-nowDay+7+1))} activity={activity} time={'17:00'}></EnterRoomModal>
                 </>
             );
-        // })
     }
 
     return (
@@ -66,27 +47,27 @@ const RoomListByDate = (props) => {
         </Wrapper>
     );
 
-    if(isLoading){
-        return (<div>loading...</div>)
-    }
-    if(isError){
-        return (<div>error!</div>)
-    }
-    if(data){
-        console.log(data);
-        return (
-            <Wrapper>
-                <RoomListByDateWrapper>
-                    <RoomByDateWrapper>
-                        {getScheduleLines()}
-                    </RoomByDateWrapper>
-                </RoomListByDateWrapper>
-                <GotoRoomByDate></GotoRoomByDate>
-                <NewRoom></NewRoom>
-            </Wrapper>
-        );
-    }
-    return(<div>예외!</div>)
+    // if(isLoading){
+    //     return (<div>loading...</div>)
+    // }
+    // if(isError){
+    //     return (<div>error!</div>)
+    // }
+    // if(data){
+    //     console.log(data);
+    //     return (
+    //         <Wrapper>
+    //             <RoomListByDateWrapper>
+    //                 <RoomByDateWrapper>
+    //                     {getScheduleLines()}
+    //                 </RoomByDateWrapper>
+    //             </RoomListByDateWrapper>
+    //             <GotoRoomByDate></GotoRoomByDate>
+    //             <NewRoom></NewRoom>
+    //         </Wrapper>
+    //     );
+    // }
+    // return(<div>예외!</div>)
 
   }
 
@@ -128,7 +109,7 @@ const RoomByDateWrapper = styled.div`
     display:flex;
     flex-direction:column;
 
-    width:84.6%;
+    width:85.9%;
     height: fit-content;
 `
 export default RoomListByDate

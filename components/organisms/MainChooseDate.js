@@ -4,11 +4,15 @@ import Link from 'next/link';
 
 import Day from '../molecules/buttons/Day';
 
-const now = new Date();
-const nowDate = now.getDate();
-const nowYear = now.getFullYear();
-const nowMonth = now.getMonth()+1;
-const nowDay = now.getDay()+1;
+const now = new Date(); //full date
+const nowYear = now.getFullYear(); //년
+const nowMonth = now.getMonth()+1; //월
+const nowDate = now.getDate(); //일
+const nowDay = now.getDay()+1; //요일
+const nowday = now.getDay(); //요일
+
+console.log(nowday-6);
+
 let divisor = 30;
 if(nowMonth===1 || nowMonth===3 || nowMonth===5 || nowMonth===7 || nowMonth===8 || nowMonth===10 || nowMonth===12){
     divisor=31;
@@ -17,13 +21,22 @@ else if(nowMonth===2){
     divisor=28;
 }
 
-const getMonth = () =>{
+const getMonth = () => {
     if((nowDate-nowDay)%divisor+1>divisor-20){
-        return(
-            <Month>
-                {nowMonth} - {nowMonth+1}월
-            </Month>
-        );
+        if(nowMonth===12){
+            return(
+                <Month>
+                    12 - 1월
+                </Month>
+            );
+        }
+        else{
+            return(
+                <Month>
+                    {nowMonth} - {nowMonth+1}월
+                </Month>
+            );
+        }
     }
     else{
         return(
@@ -35,7 +48,6 @@ const getMonth = () =>{
 }
 
 const getDateLines = () => {
-
     if(nowDay===1){
         return(
             <DaysWrapper>
@@ -55,7 +67,7 @@ const getDateLines = () => {
                     <Day year={nowYear} month={nowMonth} value={(nowDate+2)%divisor+1}></Day>
                     <Day year={nowYear} month={nowMonth} value={(nowDate+3)%divisor+1}></Day>
                     <Day year={nowYear} month={nowMonth} value={(nowDate+4)%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate+5)%divisor+1}></Day>
+                    <Day saturday={true} year={nowYear} month={nowMonth} value={(nowDate+5)%divisor+1}></Day>
                 </DaysRow>
                 <DaysRow>
                     <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate+6)%divisor+1}></Day>
@@ -64,7 +76,7 @@ const getDateLines = () => {
                     <Day year={nowYear} month={nowMonth} value={(nowDate+9)%divisor+1}></Day>
                     <Day year={nowYear} month={nowMonth} value={(nowDate+10)%divisor+1}></Day>
                     <Day year={nowYear} month={nowMonth} value={(nowDate+11)%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate+12)%divisor+1}></Day>
+                    <Day saturday={true} year={nowYear} month={nowMonth} value={(nowDate+12)%divisor+1}></Day>
                 </DaysRow>
             </DaysWrapper>
         );
@@ -72,43 +84,81 @@ const getDateLines = () => {
     else{
         return(
             <DaysWrapper>
-                <DaysRow>
-                    <DayIndicator sunday={true}>일</DayIndicator>
-                    <DayIndicator>월</DayIndicator>
-                    <DayIndicator>화</DayIndicator>
-                    <DayIndicator>수</DayIndicator>
-                    <DayIndicator>목</DayIndicator>
-                    <DayIndicator>금</DayIndicator>
-                    <DayIndicator>토</DayIndicator>
-                </DaysRow>
-                <DaysRow>
-                    <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-nowDay)%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-1))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-2))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-3))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-4))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-5))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-6))%divisor+1}></Day>
-                </DaysRow>
-                <DaysRow>
-                    <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-(nowDay-7))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-8))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-9))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-10))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-11))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-12))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-13))%divisor+1}></Day>
-                </DaysRow>
-                <DaysRow>
-                    <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-(nowDay-14))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-15))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-16))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-17))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-18))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-19))%divisor+1}></Day>
-                    <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-20))%divisor+1}></Day>
-                </DaysRow>
-            </DaysWrapper>
+            <DaysRow>
+                <DayIndicator sunday={true}>일</DayIndicator>
+                <DayIndicator>월</DayIndicator>
+                <DayIndicator>화</DayIndicator>
+                <DayIndicator>수</DayIndicator>
+                <DayIndicator>목</DayIndicator>
+                <DayIndicator>금</DayIndicator>
+                <DayIndicator>토</DayIndicator>
+            </DaysRow>
+            <DaysRow>
+                <Day sunday={true} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-1))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-2))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-3))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-4))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-5))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-6))}></Day>
+            </DaysRow>
+            <DaysRow>
+                <Day sunday={true} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-7))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-8))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-9))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-10))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-11))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-12))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-13))}></Day>
+            </DaysRow>
+            <DaysRow>
+                <Day sunday={true} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-14))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-15))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-16))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-17))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-18))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-19))}></Day>
+                <Day year={nowYear} fullDate={new Date(now.valueOf()-1000*3600*24*(nowday-20))}></Day>
+            </DaysRow>
+        </DaysWrapper>
+            // <DaysWrapper>
+            //     <DaysRow>
+            //         <DayIndicator sunday={true}>일</DayIndicator>
+            //         <DayIndicator>월</DayIndicator>
+            //         <DayIndicator>화</DayIndicator>
+            //         <DayIndicator>수</DayIndicator>
+            //         <DayIndicator>목</DayIndicator>
+            //         <DayIndicator>금</DayIndicator>
+            //         <DayIndicator>토</DayIndicator>
+            //     </DaysRow>
+            //     <DaysRow>
+            //         <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-nowDay)%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-1))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-2))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-3))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-4))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-5))%divisor+1}></Day>
+            //         <Day saturday={true} year={nowYear} month={nowMonth} value={(nowDate-(nowDay-6))%divisor+1}></Day>
+            //     </DaysRow>
+            //     <DaysRow>
+            //         <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-(nowDay-7))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-8))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-9))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-10))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-11))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-12))%divisor+1}></Day>
+            //         <Day saturday={true} year={nowYear} month={nowMonth} value={(nowDate-(nowDay-13))%divisor+1}></Day>
+            //     </DaysRow>
+            //     <DaysRow>
+            //         <Day sunday={true} year={nowYear} month={nowMonth} value={(nowDate-(nowDay-14))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-15))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-16))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-17))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-18))%divisor+1}></Day>
+            //         <Day year={nowYear} month={nowMonth} value={(nowDate-(nowDay-19))%divisor+1}></Day>
+            //         <Day saturday={true} year={nowYear} month={nowMonth} value={(nowDate-(nowDay-20))%divisor+1}></Day>
+            //     </DaysRow>
+            // </DaysWrapper>
         );
     }
 
@@ -125,38 +175,6 @@ const MainChooseDate = (props) => {
                 </Title>
                 {getMonth()}
                 {getDateLines()}
-                {/* {!props.isOpen && (
-                    <>
-                <Text size={1.5625} weight={300} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                        숫자를 선택해주세요.</Text>
-                <ActivitiesWrapper>
-                    <ActivityWrapper>
-                        <Bowling></Bowling>
-                        <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                            볼링</Text>
-                    </ActivityWrapper>
-                    <ActivityWrapper>
-                        <BoardGame></BoardGame>
-                        <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                            보드게임</Text>
-                    </ActivityWrapper>
-                    <ActivityWrapper>
-                        <EscapeRoom></EscapeRoom>
-                        <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47} position={'relative'} right={0.85}>
-                            방탈출</Text>
-                    </ActivityWrapper>
-                </ActivitiesWrapper>    
-                </>)}
-                {props.isOpen && (
-                    <>
-                <selectedActivitiyWrapper>
-                    <ActivityWrapper>
-                        <Bowling></Bowling>
-                        <Text size={0.75} weight={'normal'} align={'center'} color={'#2e9267'} lineheight={1.47}>
-                            볼링</Text>
-                    </ActivityWrapper>
-                </selectedActivitiyWrapper>    
-                </>)} */}
             </MainChooseDateWrapper>
         </Wrapper>
     );
@@ -212,7 +230,7 @@ const MainChooseDateWrapper = styled.div`
 
     width:100%;
     height: fit-content;
-    margin-bottom:1.7rem;
+    margin-bottom:0.8rem;
 `
 const DaysWrapper = styled.div`
     width:83%;

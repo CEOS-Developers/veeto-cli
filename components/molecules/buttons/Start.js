@@ -1,9 +1,8 @@
-import React, { useState, Component } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import Link from 'next/link'
 import Start from '../../atoms/buttons/texts/start';
 
-const GotoLogin = () => {
+const start = () => {
     return(
         <Link href='/main'><a style={{textDecoration:'none'}}>
             <Start></Start>
@@ -11,4 +10,4 @@ const GotoLogin = () => {
     );
 }
 
-export default GotoLogin;
+export default start;

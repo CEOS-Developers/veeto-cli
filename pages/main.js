@@ -7,8 +7,6 @@ import PageHeader from '../components/organisms/PageHeader'
 import MainExplanation from '../components/organisms/MainExplanation'
 import LeavesSeparator from '../components/atoms/icons/leavesSeparator'
 import MainChooseMethod from '../components/templates/MainChooseMethod'
-import MainSchedule from '../components/organisms/MainSchedule'
-import MainFooter from '../components/organisms/MainFooter'
 
 const Wrapper = styled.div`
     width: 100%;
@@ -30,13 +28,13 @@ const Home = () => {
         name="viewport"
         content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
       />
-        <title>Home</title>
+         <title>Veeto - 비토</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Wrapper>
       <PageHeader></PageHeader>
       <MainExplanation />
-      <LeavesSeparator style={{marginBottom:'2.2rem'}}></LeavesSeparator>
+      <LeavesSeparator style={{marginBottom:'2.4rem'}}></LeavesSeparator>
       <MainChooseMethod></MainChooseMethod>
       </Wrapper>
       </div>); 

@@ -36,7 +36,7 @@ const inroom = (props) => {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
         />
-          <title>Home</title>
+           <title>Veeto - 비토</title>
           <link rel='icon' href='/favicon.ico' />
         </Head>
         <Wrapper>

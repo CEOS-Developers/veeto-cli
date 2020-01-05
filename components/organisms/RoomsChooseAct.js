@@ -13,9 +13,9 @@ const MainExplanation = (props) => {
                     <span style={{fontFamily: 'NotoSansCJKkr', fontWeight: '500'}}>활동을</span>
                     <span> 선택하기</span>
                 </ServicePhrase2>
-                <hr style={{border:'solid 0.04rem #2e9267', width:'88%', marginTop:'0rem', marginBottom:'1.95rem'}}/>
+                <hr style={{border:'solid 0.04rem #2e9267', width:'88%', marginTop:'0rem', marginBottom:'2.75rem'}}/>
                 <ActivityTab></ActivityTab>
-                <hr style={{border:'solid 0.04rem #2e9267', width:'88%', marginTop:'1.95rem'}}/>
+                <hr style={{border:'solid 0.04rem #2e9267', width:'88%', marginTop:'1.25rem'}}/>
             </MainChooseActWrapper>
         </Wrapper>
     );

@@ -18,30 +18,46 @@ const EnterRoomModal = (props) => {
         }
     }
 
+    //액티비티 선택 화면에서 모달이 클릭되었을 때
+    const fullDate = props.fullDate;
+    let fMonth, fDate, fYear;
+    let receivedDate;
+    let refinedMonth, refinedDate;
+    if(props.fullDate){
+        fYear = fullDate.getFullYear(); //년
+        fMonth = fullDate.getMonth()+1; //월
+        fDate = fullDate.getDate(); //일
+
+        if(fMonth.toString().length===1){
+            refinedMonth = '0'+fMonth.toString();
+        }
+        else{
+            refinedMonth = fMonth.toString();
+        }
+        if(fDate.toString().length===1){
+            refinedDate = '0'+fDate.toString();
+        }
+        else{
+            refinedDate = fDate.toString();
+        }
+        receivedDate = fYear.toString()+'-'+refinedMonth+'-'+refinedDate;
+    }
+    //날짜 선택 화면에서 모달이 클릭되었을 때
+    else if(props.queryDate){
+      receivedDate = props.queryDate;
+    }
+
     return (
       <React.Fragment>
           {props.isModalOpen && (
               <>
                          <ModalOverLay/>
                          <Modal>
-                         <EnterRoomByDate fullDate={props.fullDate} updateFullDate={props.updateFullDate} month={props.month} date={props.date} day={props.day} activity={props.activity} time={props.time}></EnterRoomByDate>
+                         <EnterRoomByDate queryDate={props.queryDate} updateQueryDate={props.updateQueryDate} fullDate={props.fullDate} activity={props.activity} time={props.time}></EnterRoomByDate>
                          
-                         <Link href={{ pathname: 'hi', query: { date:`${props.fullDate}`, time:`${props.time}`, activity:`${props.activity}`}}}><a>
-                            <ApplyButt>참여 신청하기</ApplyButt>
+                         <Link href={{ pathname: 'hi', query: { date:`${receivedDate}`, time:`${props.time}`, activity:`${props.activity}`}}}><a>
+                            <ApplyButt><div>참여 신청하기</div></ApplyButt>
                          </a></Link>
-                         {/* <Icon>{icon()}</Icon>
-                         <RoomName>{props.room_name}</RoomName>
-                         <RowWrapper>
-                            <Time style={{marginRight:'1.3rem'}}>{props.month}/{props.day}</Time>
-                            <Time>{props.time}</Time>
-                         </RowWrapper>
-                         <RowWrapper>
-                            <Location></Location>
-                            <Place>{props.place}</Place>
-                         </RowWrapper> */}
-                           {/* <ButtonWrap>
-                             <button> Confirm </button>
-                           </ButtonWrap> */}
                          </Modal>
                             <CloseButt onClick={props.onClick}>X</CloseButt>
               </>
@@ -82,6 +98,10 @@ const EnterRoomModal = (props) => {
   `
 
   const ApplyButt = styled.div`
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     margin-top:1.3rem;
     margin-bottom:1.4rem;
 
@@ -96,7 +116,6 @@ const EnterRoomModal = (props) => {
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.2;
     letter-spacing: normal;
     text-align: center;
     color: #2e9267;    

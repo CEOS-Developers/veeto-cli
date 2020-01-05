@@ -15,19 +15,19 @@ else if(nowMonth===2){
 }
 
 const DayButton = (props) => {
+    const fullDate = props.fullDate;
+    const testYear = fullDate.getFullYear();
+    const testMonth = fullDate.getMonth()+1;
+    const testDate = fullDate.getDate();
+    const testDay = fullDate.getDay();
+
     let dateColor = '#d9d9d9';
     let today = false;
-    // if(props.value === nowDate) {
-    //     dateColor = '#3f6459';
-    //     today = true;
-    // }
-    // else if(props.sunday) dateColor = '#b46b16';
-    // else if((props.value-1)%divisor+1 >= nowDate || (props.value-1)%divisor+1 < (nowDate+14)%divisor) dateColor ='#2e9267';
-
-    if(props.value === 21 || props.value === 22) {
-        dateColor = '#2e9267';
+    if(props.value === nowDate) {
+        today = true;
     }
-    if(props.value===nowDate) today = true;
+    else if(((props.value-1)%divisor+1 >= nowDate+3 || (props.value-1)%divisor+1 < (nowDate+14)%divisor) && testDay==0) dateColor = '#b46b16';
+    else if(((props.value-1)%divisor+1 >= nowDate+3 || (props.value-1)%divisor+1 < (nowDate+14)%divisor) && testDay==6) dateColor = '#2e9267';
 
     return (
                 <Wrapper>
@@ -66,9 +66,8 @@ const DayBackground = styled.div`
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    width:fit-content;
-    height:fit-content;
-    padding:0.2rem;
+    width:2.7rem;
+    height:2.7rem;
     border-radius:2rem;
     background-color: ${props => props.selected ? '#d0eae1' : ''};
 `
@@ -76,13 +75,13 @@ const DayBackground = styled.div`
 const Label = styled.div`
     visibility: ${props => props.today ? 'visible' : 'hidden'};
     width: fit-content;
-    height: 1.5rem;
+    height: fit-content;
     font-family: NotoSansCJKkr;
     font-size: 1rem;
     font-weight: 500;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.6;
+    line-height: 1.5;
     letter-spacing: normal;
     text-align: center;
     color: #909090;

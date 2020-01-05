@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import styled, {css} from 'styled-components';
 import BackToLogin from '../molecules/buttons/BackToLogin';
-import PageHeader from '../organisms/PageHeader'
 import Camera from '../atoms/buttons/icons/camera';
 import Dot from '../atoms/icons/Dot';
 import Check from '../atoms/icons/check';
@@ -119,8 +118,7 @@ const SignIn1 = (props) => {
 
 
     return (
-        <>
-            <Wrapper>
+        <>  
                 <SignWrapper>
                     <Title>신청 폼 작성</Title>
                     <FormsWrapper>
@@ -133,8 +131,8 @@ const SignIn1 = (props) => {
                                 <FormTitle>성별</FormTitle>
                                 <input type="hidden" id="gender" name="gender" value={isGenderSelected} required></input>
                                 <RowWrapper>
-                                    <Male selected={isGenderSelected} onClick={() => setGenderSelected("M")} style={{marginRight:'0.3rem'}}>남</Male>
-                                    <Female selected={isGenderSelected} onClick={() => setGenderSelected("F")}>여</Female>
+                                    <Male selected={isGenderSelected} onClick={() => setGenderSelected("M")} style={{marginRight:'0.3rem'}}><div>남</div></Male>
+                                    <Female selected={isGenderSelected} onClick={() => setGenderSelected("F")}><div>여</div></Female>
                                 </RowWrapper>
                             </FormWrapper>
                         </RowWrapper>
@@ -144,10 +142,10 @@ const SignIn1 = (props) => {
                                 <FormTitle>학교</FormTitle>
                                 <input type="hidden" id="university" name="university" value={isUnivSelected}></input>
                                 <RowWrapper style={{marginBottom:'1.6rem'}}>
-                                    <Sogang selected={isUnivSelected} onClick={() => setUnivSelected(1)}>서강</Sogang>
-                                    <Yonsei selected={isUnivSelected} onClick={() => setUnivSelected(2)}>연세</Yonsei>
-                                    <Ewha selected={isUnivSelected} onClick={() => setUnivSelected(3)}>이화</Ewha>
-                                    <Hongik selected={isUnivSelected} onClick={() => setUnivSelected(4)}>홍익</Hongik>
+                                    <Sogang selected={isUnivSelected} onClick={() => setUnivSelected(1)}><div>서강</div></Sogang>
+                                    <Yonsei selected={isUnivSelected} onClick={() => setUnivSelected(2)}><div>연세</div></Yonsei>
+                                    <Ewha selected={isUnivSelected} onClick={() => setUnivSelected(3)}><div>이화</div></Ewha>
+                                    <Hongik selected={isUnivSelected} onClick={() => setUnivSelected(4)}><div>홍익</div></Hongik>
                                 </RowWrapper>
 
 
@@ -190,9 +188,9 @@ const SignIn1 = (props) => {
                                 </TitleWrapper>
                                 <input type="hidden" id="desired_gender_ratio" name="desired_gender_ratio" value={isPreferGenderSelected}></input>
                                 <RowWrapper style={{marginBottom:'3.4rem'}}>
-                                    <Same selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(1)}>동성만</Same>
-                                    <OneToOne selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(2)}>1:1</OneToOne>
-                                    <DontCare selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(3)}>무관</DontCare>
+                                    <Same selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(1)}><div>동성만</div></Same>
+                                    <OneToOne selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(2)}><div>1:1</div></OneToOne>
+                                    <DontCare selected={isPreferGenderSelected} onClick={() => setPreferGenderSelected(3)}><div>무관</div></DontCare>
                                     <Blank></Blank>
                                 </RowWrapper>
 
@@ -206,13 +204,15 @@ const SignIn1 = (props) => {
                                     <AdditionalInfoBox style={{marginBottom:'1.6rem'}}>
                                        <AdditionalInfoRow>
                                             <Dot color={"#2e9267"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
-                                            <a href="http://nextmatch.kr/privacy/amanda/index.html">
+                                            <Link href="/pInfoExplanation">
+                                            <a target="_blank/">
                                                 <InfoHead>개인정보 처리 방침 보기</InfoHead>
-                                            </a>    
+                                            </a>  
+                                            </Link>  
                                        </AdditionalInfoRow>
                                        <AdditionalInfoRow> 
                                             <Dot color={"#ffffff"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
-                                            <Explanation>수집한 개인정보는 방 개설 외의 다른 용도로 사용되지 않습니다.</Explanation>
+                                            <Explanation>수집한 개인정보는 방 개설 외 다른 용도로 사용되지 않습니다.</Explanation>
                                        </AdditionalInfoRow> 
                                        <AdditionalInfoRow> 
                                             <Dot color={"#ffffff"} style={{marginLeft:'0.4rem', marginRight:'0.7rem'}}></Dot>
@@ -254,13 +254,12 @@ const SignIn1 = (props) => {
                     </FormsWrapper>
                     
 
-                    <Link href="/done"><a>
+                    <Link href="/done"><a style={{height:'fit-content'}}>
                         <Submit onClick={handleCheckNull}>제출하기</Submit>
                     </a></Link>
                     <RewriteModal isModalOpen={isModalOpen} onClick={closeModal}></RewriteModal>
                     <AgreePModal isPModalOpen={isPModalOpen} onClick={closePModal}></AgreePModal>
                 </SignWrapper>
-                </Wrapper>
                 </>
     );
   }
@@ -345,14 +344,15 @@ const FormInput = styled.input`
 
     opacity: 0.55;
     font-family: NotoSansCJKkr;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: bolder;
     font-stretch: normal;
     font-style: normal;
-    line-height: 1.47;
+    line-height: normal;
     letter-spacing: normal;
     color: #2e9267;
     padding-left:1.9rem;
+    vertical-align:center;
 
     :focus{
         outline:none;
@@ -403,7 +403,10 @@ const Male = styled.div`
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.5;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     letter-spacing: normal;
     text-align: center;
 `
@@ -440,14 +443,17 @@ const Female = styled.div`
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.5;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     letter-spacing: normal;
     text-align: center;
 `
 
 const Submit = styled.button`
-    width: 9.4rem;
-    height: 3.5rem;
+    width: 32.2rem;
+    height: 3.8rem;
     border-radius: 2rem;
     border:none;
     background-color: #61b28f;
@@ -461,7 +467,6 @@ const Submit = styled.button`
     text-align: center;
     color: #ffffff;
 
-    margin-top:3.6rem;
     margin-bottom:3.6rem;
 `
 
@@ -480,6 +485,11 @@ const StepIndicator = styled.div`
 `
 
 const Sogang = styled.div`
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     width: 6.9rem;
     height: 3.5rem;
     border-radius: 2rem;
@@ -512,7 +522,6 @@ const Sogang = styled.div`
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.5;
     letter-spacing: normal;
     text-align: center;
 `
@@ -550,7 +559,10 @@ const Yonsei = styled.div`
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.5;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     letter-spacing: normal;
     text-align: center;
 `
@@ -588,7 +600,10 @@ const Ewha = styled.div`
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.5;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     letter-spacing: normal;
     text-align: center;
 `
@@ -625,7 +640,10 @@ const Hongik = styled.div`
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.5;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     letter-spacing: normal;
     text-align: center;
 `
@@ -662,7 +680,10 @@ const Same = styled.div`
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.5;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     letter-spacing: normal;
     text-align: center;
 `
@@ -700,7 +721,10 @@ const OneToOne = styled.div`
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.5;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     letter-spacing: normal;
     text-align: center;
 `
@@ -738,7 +762,10 @@ const DontCare = styled.div`
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
-    line-height: 2.5;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     letter-spacing: normal;
     text-align: center;
 `
@@ -804,7 +831,7 @@ const Caution = styled.div`
     width: fit-content;
     height: fit-content;
     font-family: NotoSansCJKkr;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
@@ -900,7 +927,7 @@ const Explanation = styled.div`
     width:fit-content;
     height:fit-content
     font-family: NotoSansCJKkr;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: normal;
     font-stretch: normal;
     font-style: normal;
